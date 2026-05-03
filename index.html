@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Global Reach of Anime</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow: hidden; height: 100%; width: 100%; background: #030209; }
+
+    /* ══ VIDEO INTRO ══ */
+    #video-intro {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #000;
+      transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #video-intro.fading { opacity: 0; pointer-events: none; }
+    #intro-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    #video-skip {
+      position: absolute; bottom: 40px; right: 40px;
+      background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.28);
+      color: #fff; padding: 10px 28px; border-radius: 100px;
+      font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    #video-skip:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); }
+
+    /* ══ NAV ══ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 0 48px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .nav-logo {
+      font-family: 'Bodoni Moda', serif; font-size: 22px; font-weight: 900;
+      color: rgba(255,255,255,0.9); letter-spacing: 0.1em;
+      text-decoration: none; pointer-events: all;
+    }
+    #era-label {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); transition: opacity 0.4s;
+    }
+
+    /* ══ STAGE (fixed, full viewport) ══ */
+    #stage {
+      position: fixed; inset: 0; z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Backgrounds */
+    #bg-layer { position: absolute; inset: 0; }
+    .sbg {
+      position: absolute; inset: 0;
+      opacity: 0; will-change: opacity;
+      background-size: cover; background-position: center;
+    }
+    .sbg[data-n="0"] { opacity: 1; }
+
+    /* Slide 0: hero */
+    .sbg[data-n="0"] {
+      background-image:
+        linear-gradient(to top, rgba(3,2,9,0.96) 0%, rgba(3,2,9,0.65) 35%, rgba(3,2,9,0.2) 65%, rgba(3,2,9,0) 100%),
+        url('uploads/459572-9b960201.png');
+      background-size: cover; background-position: center 20%;
+    }
+    .sbg[data-n="1"]  { background: radial-gradient(ellipse at 80% 20%, rgba(120,70,0,0.35) 0%, #09060000 60%), linear-gradient(160deg, #0e0800 0%, #1a1000 60%, #090600 100%); }
+    .sbg[data-n="2"]  { background: radial-gradient(ellipse at 20% 80%, rgba(120,0,0,0.3) 0%, transparent 60%), linear-gradient(160deg, #0e0000 0%, #1a0505 60%, #090000 100%); }
+    .sbg[data-n="3"]  { background: radial-gradient(ellipse at 80% 80%, rgba(0,80,30,0.3) 0%, transparent 60%), linear-gradient(160deg, #000e05 0%, #001a0d 60%, #000a05 100%); }
+    .sbg[data-n="4"]  { background: radial-gradient(ellipse at 30% 20%, rgba(180,140,0,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0c00 0%, #1a1800 60%, #0a0900 100%); }
+    .sbg[data-n="5"]  { background: radial-gradient(ellipse at 70% 30%, rgba(160,60,0,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0400 0%, #1a0800 60%, #0a0300 100%); }
+    .sbg[data-n="6"]  { background: radial-gradient(ellipse at 20% 70%, rgba(0,30,120,0.35) 0%, transparent 60%), linear-gradient(160deg, #00000e 0%, #000018 60%, #00000a 100%); }
+    .sbg[data-n="7"]  { background: radial-gradient(ellipse at 50% 50%, rgba(80,0,160,0.4) 0%, transparent 55%), linear-gradient(160deg, #08001a 0%, #130030 60%, #08001a 100%); }
+    .sbg[data-n="8"]  { background: radial-gradient(ellipse at 80% 20%, rgba(0,100,100,0.3) 0%, transparent 60%), linear-gradient(160deg, #000d0d 0%, #001818 60%, #000a0a 100%); }
+    .sbg[data-n="9"]  { background: radial-gradient(ellipse at 20% 80%, rgba(140,0,40,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0005 0%, #1a000a 60%, #0a0003 100%); }
+    .sbg[data-n="10"] { background: radial-gradient(ellipse at 70% 50%, rgba(20,40,100,0.3) 0%, transparent 60%), linear-gradient(160deg, #030614 0%, #060d24 60%, #030614 100%); }
+    .sbg[data-n="11"] { background: radial-gradient(ellipse at 30% 30%, rgba(160,0,80,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0008 0%, #1a0010 60%, #0d0008 100%); }
+    .sbg[data-n="12"] { background: radial-gradient(ellipse at 60% 60%, rgba(0,20,140,0.4) 0%, transparent 55%), linear-gradient(160deg, #000510 0%, #000a20 60%, #000510 100%); }
+    .sbg[data-n="13"] { background: radial-gradient(ellipse at 50% 50%, rgba(60,0,120,0.25) 0%, transparent 55%), linear-gradient(160deg, #030108 0%, #060312 60%, #030108 100%); }
+
+    /* Content layers */
+    #content-layer { position: absolute; inset: 0; }
+    .sct {
+      position: absolute; inset: 0;
+      opacity: 0; will-change: opacity;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 0 72px;
+      pointer-events: none;
+    }
+    .sct[data-n="0"] { opacity: 1; }
+    .sct.active-slide { pointer-events: all; }
+
+    /* ── Slide interior layout ── */
+    .slide-inner {
+      max-width: 1280px; width: 100%; margin: 0 auto;
+      padding: 0 64px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: end;
+    }
+    .slide-inner.full { grid-template-columns: 1fr; }
+    .slide-inner.flip { direction: rtl; }
+    .slide-inner.flip > * { direction: ltr; }
+
+    /* Big bg year */
+    .bg-year {
+      position: absolute; right: 0; bottom: 0;
+      font-family: 'Bodoni Moda', serif; font-weight: 900;
+      font-size: clamp(140px, 22vw, 280px);
+      line-height: 0.85; color: rgba(255,255,255,0.035);
+      user-select: none; letter-spacing: -0.04em;
+      pointer-events: none;
+    }
+
+    /* Text panel */
+    .slide-text { position: relative; z-index: 2; }
+    .era-pill {
+      display: inline-block; font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 14px;
+      border: 1px solid currentColor;
+    }
+    .slide-year {
+      font-family: 'Bodoni Moda', serif; font-weight: 900;
+      font-size: clamp(44px, 6vw, 76px); line-height: 1;
+      color: #fff; margin-bottom: 10px; letter-spacing: -0.02em;
+    }
+    .slide-title {
+      font-family: 'Bodoni Moda', serif; font-weight: 700;
+      font-size: clamp(18px, 2.2vw, 26px); line-height: 1.25;
+      color: rgba(255,255,255,0.95); margin-bottom: 16px;
+    }
+    .slide-body {
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      font-weight: 400; line-height: 1.78; color: rgba(255,255,255,0.62);
+      max-width: 580px;
+    }
+    .slide-body strong { color: rgba(255,255,255,0.88); font-weight: 600; }
+    .slide-body em { font-style: italic; color: rgba(255,255,255,0.75); }
+    .slide-quote {
+      margin-top: 14px; padding: 12px 16px;
+      border-left: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+      border-radius: 0 8px 8px 0;
+      font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.5);
+      font-style: italic;
+    }
+    .slide-quote cite { display: block; margin-top: 5px; font-size: 11px; font-style: normal; letter-spacing: 0.06em; }
+
+    /* Stats row */
+    .stats-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .stat-chip {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; padding: 10px 16px;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .stat-chip-val {
+      font-family: 'Bodoni Moda', serif; font-size: 1.35rem;
+      font-weight: 700; color: #fff; line-height: 1;
+    }
+    .stat-chip-lbl {
+      font-family: 'Inter', sans-serif; font-size: 10px;
+      font-weight: 500; color: rgba(255,255,255,0.42); letter-spacing: 0.04em;
+    }
+
+    /* Right panel (visual card) */
+    .slide-visual { position: relative; z-index: 2; }
+    .visual-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 24px; backdrop-filter: blur(8px);
+    }
+    .visual-card-title {
+      font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); margin-bottom: 16px;
+    }
+
+    /* Milestone grid */
+    .milestone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .milestone-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 14px;
+    }
+    .milestone-yr { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.28); margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+    .milestone-ttl { font-family: 'Bodoni Moda', serif; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 5px; line-height: 1.2; }
+    .milestone-desc { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.55; font-family: 'Inter', sans-serif; }
+
+    /* Pipeline list */
+    .pipeline { display: flex; flex-direction: column; gap: 10px; }
+    .pipeline-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 12px 14px;
+    }
+    .pipeline-num {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bodoni Moda', serif; font-size: 13px; font-weight: 700;
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+    }
+    .pipeline-text-title { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); font-family: 'Inter', sans-serif; margin-bottom: 2px; }
+    .pipeline-text-desc { font-size: 11px; color: rgba(255,255,255,0.42); line-height: 1.5; font-family: 'Inter', sans-serif; }
+
+    /* Fact chips list */
+    .fact-list { display: flex; flex-direction: column; gap: 10px; }
+    .fact-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 11px 14px;
+    }
+    .fact-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .fact-title { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.82); font-family: 'Inter', sans-serif; margin-bottom: 2px; }
+    .fact-desc { font-size: 11px; color: rgba(255,255,255,0.42); line-height: 1.5; font-family: 'Inter', sans-serif; }
+
+    /* ── Hero slide specifics ── */
+    .hero-full {
+      padding: 0 64px 80px; max-width: 1280px; margin: 0 auto; width: 100%;
+    }
+    .hero-kicker {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: 'Bodoni Moda', serif; font-weight: 900;
+      font-size: clamp(56px, 11vw, 144px); line-height: 0.92;
+      letter-spacing: -0.02em; color: #fff; margin-bottom: 28px;
+    }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .hero-stat {
+      background: rgba(255,255,255,0.07); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.13); border-radius: 12px;
+      padding: 12px 20px; display: flex; flex-direction: column; gap: 3px;
+    }
+    .hero-stat-val {
+      font-family: 'Bodoni Moda', serif; font-size: 1.55rem; font-weight: 700;
+      color: #fff; line-height: 1;
+    }
+    .hero-stat-lbl { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.42); letter-spacing: 0.04em; font-family: 'Inter', sans-serif; }
+    .hero-scroll-cue {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.35); font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .scroll-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
+
+    /* ── Slide navigation dots (right side) ── */
+    #slide-nav {
+      position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+      z-index: 400; display: flex; flex-direction: column; gap: 9px;
+      pointer-events: all;
+    }
+    .snav-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.22); border: none; cursor: pointer;
+      transition: background 0.3s, transform 0.3s; padding: 0;
+      position: relative;
+    }
+    .snav-dot.active { background: #fff; transform: scale(1.4); }
+    .snav-dot:hover:not(.active) { background: rgba(255,255,255,0.5); }
+    /* Tooltip */
+    .snav-dot::after {
+      content: attr(data-label);
+      position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.75); color: #fff;
+      font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; white-space: nowrap;
+      padding: 4px 10px; border-radius: 6px;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .snav-dot:hover::after { opacity: 1; }
+
+    /* ── Timeline bar (bottom) ── */
+    #timeline-wrap {
+      position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+      z-index: 400; width: min(680px, 80vw);
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      pointer-events: none;
+    }
+    #timeline-track {
+      width: 100%; height: 2px;
+      background: rgba(255,255,255,0.12); border-radius: 2px; position: relative;
+    }
+    #timeline-fill {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      background: rgba(255,255,255,0.7); border-radius: 2px;
+      transition: width 0.05s linear;
+      width: 0%;
+    }
+    #timeline-label {
+      font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── Market chart (slide 13) ── */
+    .chart-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .chart-box {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 18px;
+    }
+    .chart-box-title { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px; font-family: 'Inter', sans-serif; }
+
+    /* Kpi row */
+    .kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .kpi-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px; padding: 14px 16px;
+    }
+    .kpi-val { font-family: 'Bodoni Moda', serif; font-size: 1.5rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 4px; }
+    .kpi-lbl { font-size: 10px; color: rgba(255,255,255,0.38); font-family: 'Inter', sans-serif; line-height: 1.4; }
+
+    /* World map */
+    .map-pin { position: absolute; transform: translate(-50%, -100%); cursor: pointer; z-index: 10; }
+    .map-pin:hover { z-index: 20; }
+    .pin-dot { width: 10px; height: 10px; border-radius: 50%; background: #f43f5e; border: 2px solid rgba(0,0,0,0.5); box-shadow: 0 0 0 3px rgba(244,63,94,0.3), 0 0 12px rgba(244,63,94,0.5); margin: 0 auto 2px; }
+    .pin-pulse { position: absolute; inset: -5px; border-radius: 50%; background: rgba(244,63,94,0.15); animation: pin-pulse 2.2s ease-out infinite; }
+    @keyframes pin-pulse { 0%{transform:scale(0.8);opacity:0.8} 100%{transform:scale(2.4);opacity:0} }
+    .pin-label { font-size: 9px; font-weight: 600; letter-spacing: 0.04em; color: rgba(255,255,255,0.85); text-align: center; background: rgba(5,5,15,0.75); padding: 1px 5px; border-radius: 3px; white-space: nowrap; font-family: 'Inter', sans-serif; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 800; display: none; align-items: center; justify-content: center; padding: 1.5rem; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #0c0c1e; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; max-width: 520px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 2.5rem; position: relative; }
+    .modal-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #f43f5e; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; }
+    .modal-title { font-family: 'Bodoni Moda', serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
+    .modal-body { font-size: 0.88rem; line-height: 1.78; color: rgba(255,255,255,0.58); font-family: 'Inter', sans-serif; }
+    .modal-stat { color: #a855f7; font-weight: 600; }
+    .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; color: rgba(255,255,255,0.5); transition: color 0.2s, background 0.2s; }
+    .modal-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+    /* Scroll ghost (creates scroll height, sits behind fixed stage) */
+    /* scroll ghost removed — using wheel-driven virtual scroll */
+
+    /* Grain noise overlay */
+    #stage::after {
+      content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Main content initially hidden until video fades */
+    #main-ui { opacity: 0; transition: opacity 1.4s cubic-bezier(0.4,0,0.2,1); }
+    #main-ui.visible { opacity: 1; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .slide-inner { grid-template-columns: 1fr; gap: 24px; padding: 0 24px; }
+      .slide-inner.flip { direction: ltr; }
+      .hero-full { padding: 0 24px 80px; }
+      .hero-title { font-size: clamp(44px, 13vw, 80px); }
+      .slide-visual { display: none; }
+      #navbar { padding: 0 24px; }
+      #timeline-wrap { width: 90vw; }
+      .chart-grid { grid-template-columns: 1fr; }
+      .bg-year { font-size: clamp(100px, 28vw, 180px); }
+    }
+    @media (max-width: 600px) {
+      .stats-row .stat-chip { padding: 8px 12px; }
+      .hero-stats .hero-stat { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ SCROLL GHOST (behind everything — creates scroll height) ══ -->
+
+<!-- ══ VIDEO INTRO ══ -->
+<div id="video-intro">
+  <video id="intro-video" autoplay muted playsinline preload="auto">
+    <source src="uploads/Japans Anime Test.mp4" type="video/mp4">
+  </video>
+  <button id="video-skip" onclick="skipVideo()">Skip ›</button>
+</div>
+
+<!-- ══ MAIN UI (fades in as video fades out) ══ -->
+<div id="main-ui">
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo">アニメ</a>
+  <div id="era-label">Origins</div>
+</nav>
+
+<!-- SLIDE NAV DOTS -->
+<div id="slide-nav">
+  <button class="snav-dot active" data-n="0"  data-label="Home"></button>
+  <button class="snav-dot"        data-n="1"  data-label="1917 · Origins"></button>
+  <button class="snav-dot"        data-n="2"  data-label="1933–45 · Wartime"></button>
+  <button class="snav-dot"        data-n="3"  data-label="1950s · Studios"></button>
+  <button class="snav-dot"        data-n="4"  data-label="1963 · Astro Boy"></button>
+  <button class="snav-dot"        data-n="5"  data-label="1970s · Media Mix"></button>
+  <button class="snav-dot"        data-n="6"  data-label="1983–88 · Global"></button>
+  <button class="snav-dot"        data-n="7"  data-label="1988 · Akira"></button>
+  <button class="snav-dot"        data-n="8"  data-label="1990s · TV Global"></button>
+  <button class="snav-dot"        data-n="9"  data-label="1995–2001 · Prestige"></button>
+  <button class="snav-dot"        data-n="10" data-label="2000s · Fan-Subs"></button>
+  <button class="snav-dot"        data-n="11" data-label="2010s · Streaming"></button>
+  <button class="snav-dot"        data-n="12" data-label="2020s · Theaters"></button>
+  <button class="snav-dot"        data-n="13" data-label="Today · Market"></button>
+</div>
+
+<!-- TIMELINE BAR -->
+<div id="timeline-wrap">
+  <div id="timeline-track"><div id="timeline-fill"></div></div>
+  <div id="timeline-label">1917</div>
+</div>
+
+<!-- ══ STAGE ══ -->
+<div id="stage">
+
+  <!-- ── BACKGROUNDS ── -->
+  <div id="bg-layer">
+    <div class="sbg" data-n="0"></div>
+    <div class="sbg" data-n="1"></div>
+    <div class="sbg" data-n="2"></div>
+    <div class="sbg" data-n="3"></div>
+    <div class="sbg" data-n="4"></div>
+    <div class="sbg" data-n="5"></div>
+    <div class="sbg" data-n="6"></div>
+    <div class="sbg" data-n="7"></div>
+    <div class="sbg" data-n="8"></div>
+    <div class="sbg" data-n="9"></div>
+    <div class="sbg" data-n="10"></div>
+    <div class="sbg" data-n="11"></div>
+    <div class="sbg" data-n="12"></div>
+    <div class="sbg" data-n="13"></div>
+  </div>
+
+  <!-- ── CONTENT LAYERS ── -->
+  <div id="content-layer">
+
+    <!-- SLIDE 0: HERO -->
+    <div class="sct active-slide" data-n="0">
+      <div class="hero-full">
+        <div class="hero-kicker">A century of cultural revolution</div>
+        <h1 class="hero-title">THE GLOBAL<br>REACH OF<br>ANIME</h1>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-val">$38.98B</div>
+            <div class="hero-stat-lbl">Global market 2025</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">15M+</div>
+            <div class="hero-stat-lbl">Crunchyroll paid subscribers</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">$150B+</div>
+            <div class="hero-stat-lbl">Pokémon franchise revenue</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">1B+</div>
+            <div class="hero-stat-lbl">Netflix anime views 2024</div>
+          </div>
+        </div>
+        <div class="hero-scroll-cue">
+          <div class="scroll-dot">↓</div>
+          <span>Scroll to explore the timeline</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 1: 1917 ORIGINS -->
+    <div class="sct" data-n="1">
+      <div class="bg-year">1917</div>
+      <div class="slide-inner">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#f59e0b; border-color:rgba(245,158,11,0.4); background:rgba(245,158,11,0.08)">The Origin</div>
+          <div class="slide-year">1910s – 1920s</div>
+          <h2 class="slide-title">Japan's First Moving Pictures</h2>
+          <div class="slide-body">
+            <p>Three animators independently produced Japan's first animated films in early 1917. <strong>Shimokawa Ōten's</strong> Dekobō Shingachō opened in February 1917. <strong>Kitayama Seitarō</strong> — trained as a Western painter — approached Nikkatsu in January and later founded the first dedicated anime studio in autumn 1921. <strong>Kōuchi Jun'ichi's</strong> Namakura Gatana ("The Dull Sword," June 30, 1917) is the oldest surviving piece of Japanese animation — approximately four minutes depicting a hapless samurai.</p>
+            <p style="margin-top:10px">Nearly twenty short animated films appeared in 1917 alone — all made without transparent cel sheets, every frame redrawn by hand. Some used whitewashing to redraw only moving parts while keeping backgrounds static. Early terms were <em>manga-eiga</em> ("cartoon films") and <em>dōga</em> ("moving pictures") — "anime" came much later.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">~20</span><span class="stat-chip-lbl">Films in 1917 alone</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">4 min</span><span class="stat-chip-lbl">Oldest surviving runtime</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">1905</span><span class="stat-chip-lbl">Katsudō Shashin — earliest artifact</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">Pioneer Animators — 1917</div>
+            <div class="fact-list">
+              <div class="fact-item">
+                <div class="fact-icon">✏️</div>
+                <div><div class="fact-title">Shimokawa Ōten (1892–1973)</div><div class="fact-desc">Manga artist hired by Tenkatsu. Used blackboard animation and paper. Eye damage from overwork — only five films made, all in 1917.</div></div>
+              </div>
+              <div class="fact-item">
+                <div class="fact-icon">🎨</div>
+                <div><div class="fact-title">Kitayama Seitarō (1888–1945)</div><div class="fact-desc">Western painter-turned-animator. Founded Kitayama Eiga Seisakujo in 1921 — Japan's first dedicated anime studio. Destroyed in the 1923 Kantō Earthquake.</div></div>
+              </div>
+              <div class="fact-item">
+                <div class="fact-icon">⚔️</div>
+                <div><div class="fact-title">Kōuchi Jun'ichi (1886–1970)</div><div class="fact-desc">Namakura Gatana (June 30, 1917) is the oldest surviving Japanese animation. Most 1917–1923 films were lost when nitrocellulose reels deteriorated or were sold as scrap.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: 1930s-1940s WARTIME -->
+    <div class="sct" data-n="2">
+      <div class="bg-year">1945</div>
+      <div class="slide-inner flip">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#ef4444; border-color:rgba(239,68,68,0.4); background:rgba(239,68,68,0.08)">Wartime Era</div>
+          <div class="slide-year">1930s – 1940s</div>
+          <h2 class="slide-title">Animation Goes to War</h2>
+          <div class="slide-body">
+            <p>In 1933, <strong>Kenzō Masaoka</strong> debuted the first anime with synchronized pre-recorded voice — a "talkie" — making Japan only the second country after the United States to achieve this. The <strong>Film Law of 1939</strong> (Eiga-hō) mandated all films carry nationalist themes; studios were directly funded by the Imperial Army and Navy.</p>
+            <p style="margin-top:10px"><strong>Momotarō: Umi no Shinpei</strong> (1945) became Japan's first feature-length anime at 74 minutes — completed largely by retrained waitresses as most animators had been conscripted. Released April 1945, it reached cinemas when Tokyo was already in ruins. The surviving copy was discovered in a warehouse in 1983.</p>
+          </div>
+          <div class="slide-quote">
+            "A young Osamu Tezuka saw Momotarō: Umi no Shinpei and was moved to tears. Historians record this as one of the foundational inspirations that drove him into animation."
+            <cite>— Research confirmation, multiple sources</cite>
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">1933</span><span class="stat-chip-lbl">First Japanese animated talkie</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">74 min</span><span class="stat-chip-lbl">First feature-length anime</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">1983</span><span class="stat-chip-lbl">Lost copy rediscovered</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">Wartime Production Pipeline</div>
+            <div class="pipeline">
+              <div class="pipeline-row"><div class="pipeline-num">1</div><div><div class="pipeline-text-title">Film Law of 1939 (Eiga-hō)</div><div class="pipeline-text-desc">All films required to carry nationalist themes aligned with government objectives. Studios funded by Imperial Army & Navy.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">2</div><div><div class="pipeline-text-title">Momotaro's Sea Eagles (1943)</div><div class="pipeline-text-desc">37 minutes, directed by Mitsuyo Seo. Commissioned by the Japanese Imperial Navy as propaganda.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">3</div><div><div class="pipeline-text-title">Momotaro: Sacred Sailors (1945)</div><div class="pipeline-text-desc">Japan's first feature anime. Staff: largely retrained waitresses — animators conscripted. Inspired a young Tezuka.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">4</div><div><div class="pipeline-text-title">Post-War Survival</div><div class="pipeline-text-desc">Animators faced scrutiny as propagandists. Many survived by working for the US Occupation's Civil Information &amp; Education dept.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: 1950s STUDIOS -->
+    <div class="sct" data-n="3">
+      <div class="bg-year">1956</div>
+      <div class="slide-inner">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#22c55e; border-color:rgba(34,197,94,0.4); background:rgba(34,197,94,0.08)">Studio Era</div>
+          <div class="slide-year">1950s</div>
+          <h2 class="slide-title">The Dream of Becoming "The Disney of the East"</h2>
+          <div class="slide-body">
+            <p>After World War II, Japan rebuilt its media industry with global ambition. <strong>Tōei Animation</strong> was acquired on January 23, 1948, by veterans of wartime animation. In 1956, the Toei Company — led by former railway accountant <strong>Hiroshi Okawa</strong> — purchased the struggling studio with an explicit goal: become "the Disney of the East." At acquisition it had 23 staff. Okawa launched a massive training program growing it to <strong>500+ employees</strong>.</p>
+            <p style="margin-top:10px">Their first feature, <em>Hakujaden</em> ("The Tale of the White Serpent," 1958), became Japan's first full-color feature-length anime at 78 minutes, based on a Chinese folktale. A young <strong>Hayao Miyazaki</strong> and <strong>Isao Takahata</strong> — later founders of Studio Ghibli — both joined Tōei in the late 1950s–early 1960s, learning their craft in this environment.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">23→500+</span><span class="stat-chip-lbl">Staff growth under Okawa</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">1958</span><span class="stat-chip-lbl">Japan's first colour anime feature</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">78 min</span><span class="stat-chip-lbl">Hakujaden runtime</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">Seeds of Global Export</div>
+            <div class="milestone-grid">
+              <div class="milestone-card">
+                <div class="milestone-yr">1948</div>
+                <div class="milestone-ttl">Tōei Founded</div>
+                <div class="milestone-desc">Japan Animated Films co-founded by wartime animation veterans Masaoka & Yamamoto</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">1956</div>
+                <div class="milestone-ttl">Toei Acquisition</div>
+                <div class="milestone-desc">Hiroshi Okawa sets goal: "the Disney of the East." 23 staff → 500+</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">1958</div>
+                <div class="milestone-ttl">Hakujaden</div>
+                <div class="milestone-desc">Japan's first full-colour feature anime. Based on Chinese folktale. Shown internationally in the USA.</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">1950s–60s</div>
+                <div class="milestone-ttl">Future Ghibli</div>
+                <div class="milestone-desc">Miyazaki and Takahata both train at Tōei — the school that shaped the next generation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: 1963 ASTRO BOY -->
+    <div class="sct" data-n="4">
+      <div class="bg-year">1963</div>
+      <div class="slide-inner flip">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#eab308; border-color:rgba(234,179,8,0.4); background:rgba(234,179,8,0.08)">The Tezuka Revolution</div>
+          <div class="slide-year">1963</div>
+          <h2 class="slide-title">Astro Boy: The Economic Blueprint That Built Modern Anime</h2>
+          <div class="slide-body">
+            <p><em>Tetsuwan Atomu</em> (Astro Boy) premiered on <strong>Fuji TV, January 1, 1963</strong> — New Year's Day. It ran 193 episodes across four seasons, concluding December 31, 1966. Tezuka's genius was economic: Mushi Production accepted <strong>¥550,000 per episode</strong> against actual production costs of ¥1–2 million, intentionally producing at a loss while betting on merchandise and overseas deals.</p>
+            <p style="margin-top:10px">He pioneered <em>limited animation</em> — 10fps vs the standard 24fps — using reusable cel banks, panning backgrounds, and manga panels directly as storyboards. At peak, <strong>40.7% of Japanese TV households</strong> with a TV watched Astro Boy. An NBC buyer mistook it for an American production. Tezuka traveled to New York, signed a deal, and Astro Boy hit American airwaves in <strong>September 1963</strong> — the same year as the Japanese launch.</p>
+          </div>
+          <div class="slide-quote">
+            "Calling Astro Boy the most important anime of all time is not simply nostalgia — it reflects the series' massive impact on the medium itself." — Diffey
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">40.7%</span><span class="stat-chip-lbl">Peak Japanese viewership</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">10fps</span><span class="stat-chip-lbl">vs 24fps Disney standard</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">193</span><span class="stat-chip-lbl">Episodes across 4 seasons</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">Sep 1963</span><span class="stat-chip-lbl">US broadcast — same year as Japan</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">The Astro Boy Business Model</div>
+            <div class="pipeline">
+              <div class="pipeline-row"><div class="pipeline-num">📖</div><div><div class="pipeline-text-title">Manga (1952–1968)</div><div class="pipeline-text-desc">Serialised in Shōnen magazine. 100M+ copies sold across 23 volumes — Tezuka's best-selling manga.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">📺</div><div><div class="pipeline-text-title">TV Anime — Deliberate Loss</div><div class="pipeline-text-desc">¥550k fee vs ¥2M cost. Loss-leader model: build audience, recoup through licensing. Required 52 episodes/year — unprecedented pace.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">🧸</div><div><div class="pipeline-text-title">Merchandise Wave</div><div class="pipeline-text-desc">"Touched off a wave of licensed (and unlicensed) children's toys." Revenue recycled back into production costs.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">🌍</div><div><div class="pipeline-text-title">NBC Deal — $8,300/ep</div><div class="pipeline-text-desc">52 episodes at ¥3M each. Only 104 of 193 episodes dubbed. English masters destroyed in 1975 when Mushi filed for bankruptcy.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: 1970s MEDIA MIX -->
+    <div class="sct" data-n="5">
+      <div class="bg-year">1977</div>
+      <div class="slide-inner">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#f97316; border-color:rgba(249,115,22,0.4); background:rgba(249,115,22,0.08)">The Media Mix</div>
+          <div class="slide-year">1960s – 1970s</div>
+          <h2 class="slide-title">Anime Becomes an Ecosystem</h2>
+          <div class="slide-body">
+            <p>From the 1960s, producers were approached by toy and card manufacturers to license anime characters — the model Astro Boy had proven. By the 1970s, anime was no longer a single show; it was an ecosystem of manga, TV, cinema, magazines, toys, model kits, and music — what Japan called the <em>media mix</em>.</p>
+            <p style="margin-top:10px"><strong>Space Battleship Yamato</strong> began as a failure — only 26 of 52 planned TV episodes aired. Yet the 1977 theatrical film edit became a cultural phenomenon: <strong>¥2.1 billion box office</strong> (≈$122M in 2025 terms), 2.3 million viewers, and 20,000+ fans queuing overnight — described as "the first official Anime Boom." Producer Nishizaki's guerrilla marketing sent fan club members instruction kits to post flyers and request the theme song on radio. <strong>Animage</strong> magazine launched July 1978, creating Japan's first organised anime fan culture. VCR penetration soared from 5–10% (1980) to <strong>52% by 1985</strong>.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">¥2.1B</span><span class="stat-chip-lbl">Yamato 1977 box office</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">20,000+</span><span class="stat-chip-lbl">Fans queued overnight</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">52%</span><span class="stat-chip-lbl">VCR penetration by 1985</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">The Media Ecosystem</div>
+            <div class="milestone-grid">
+              <div class="milestone-card">
+                <div class="milestone-yr">1966</div>
+                <div class="milestone-ttl">Sally the Witch</div>
+                <div class="milestone-desc">First magical girl (mahō shōjo) anime. Early eps in B&W; ep 18 onwards in colour.</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">1971</div>
+                <div class="milestone-ttl">Lupin III</div>
+                <div class="milestone-desc">First series cancelled after 23 eps — second series (1977) ran 155 eps and became a classic.</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">1978</div>
+                <div class="milestone-ttl">Animage Magazine</div>
+                <div class="milestone-desc">Japan's first dedicated anime magazine. Created the annual Anime Grand Prix fan poll.</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">1979</div>
+                <div class="milestone-ttl">Doraemon</div>
+                <div class="milestone-desc">Began 1979. Now the longest-running anime of all time. Mushi bankruptcy → Madhouse &amp; Sunrise born.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: 1983-1988 GLOBAL FRANCHISES -->
+    <div class="sct" data-n="6">
+      <div class="bg-year">1986</div>
+      <div class="slide-inner flip">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#3b82f6; border-color:rgba(59,130,246,0.4); background:rgba(59,130,246,0.08)">Global Franchises</div>
+          <div class="slide-year">1983 – 1988</div>
+          <h2 class="slide-title">Japan's Characters Conquer the World</h2>
+          <div class="slide-body">
+            <p>On <strong>December 21, 1983</strong>, Dallos became the first OVA (Original Video Animation) — directed by Mamoru Oshii (later of Ghost in the Shell). Originally planned as a TV show by Studio Pierrot, the OVA format allowed it without broadcaster approval. OVA tapes sold for ¥5,800–¥9,800 per volume, with 1,000–10,000 copies per print run.</p>
+            <p style="margin-top:10px"><strong>Mobile Suit Gundam</strong> (1979–80) was cancelled due to low ratings — then its 1980 Gunpla model kit line triggered a massive revival. <em>Gundam's initial success was driven by toys, not ratings.</em> Dragon Ball launched in Weekly Shōnen Jump in 1984; the anime followed in 1986. Saint Seiya became more popular in France, Italy, and Latin America than in Japan. <strong>Captain Tsubasa</strong> directly inspired Zinedine Zidane, Fernando Torres, and Didier Drogba to pursue professional football careers.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">1983</span><span class="stat-chip-lbl">First OVA (Dallos)</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">1986</span><span class="stat-chip-lbl">Dragon Ball anime begins</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">Zidane</span><span class="stat-chip-lbl">Torres · Drogba — inspired by Tsubasa</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">OVA vs TV — The Format Shift</div>
+            <div class="fact-list">
+              <div class="fact-item"><div class="fact-icon">📺</div><div><div class="fact-title">TV Constraints</div><div class="fact-desc">Network approval required · Advertiser pressure · Broadcast schedule · Mass audience only · Content restricted</div></div></div>
+              <div class="fact-item"><div class="fact-icon">📼</div><div><div class="fact-title">OVA Freedoms</div><div class="fact-desc">No broadcaster needed · Niche audiences · Mature/experimental content · Collector pricing ¥5,800–¥9,800/vol · 1,000–10,000 print runs</div></div></div>
+              <div class="fact-item"><div class="fact-icon">🤖</div><div><div class="fact-title">Gundam's Lesson</div><div class="fact-desc">Cancelled 1980 due to low ratings. Gunpla model kits launched same year → massive demand → series revival. Franchises need merchandise, not just ratings.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: 1988 AKIRA -->
+    <div class="sct" data-n="7">
+      <div class="bg-year">1988</div>
+      <div class="slide-inner">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#a855f7; border-color:rgba(168,85,247,0.4); background:rgba(168,85,247,0.08)">The Film That Changed Everything</div>
+          <div class="slide-year">1988</div>
+          <h2 class="slide-title">Akira</h2>
+          <div class="slide-body">
+            <p>Released <strong>July 16, 1988</strong> by Toho. Production budget: <strong>¥700 million ($5.5M)</strong> — combined production and advertising: ¥1.1 billion ($9M) — the largest anime film budget at the time. The film used <strong>160,000 animation cels</strong> (2–3× more than typical productions) and <strong>327 different colors</strong>, 50 of which were custom-created. Most of the film takes place at night, requiring far more complex color work than daytime scenes.</p>
+            <p style="margin-top:10px">Akira was the <strong>first anime to record dialogue before animation</strong> — standard in the US, but revolutionary in Japan. CGI was used for exactly one specific pattern indicator; the rest was entirely hand-drawn. It debuted #3 on the UK box office charts (grossing £439,345 its opening weekend). <strong>$80M+</strong> worldwide in home video sales built its international cult following. It directly influenced The Matrix and spawned the Western anime distribution industry.</p>
+          </div>
+          <div class="slide-quote">
+            "The film that changed everything." — Cinefantastique, 2004 list of 10 Essential Animations
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">160,000</span><span class="stat-chip-lbl">Animation cels</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">327</span><span class="stat-chip-lbl">Unique colors used</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">¥6.3B</span><span class="stat-chip-lbl">Japan box office</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">$80M+</span><span class="stat-chip-lbl">Worldwide home video</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">Production Record-Breakers</div>
+            <div class="fact-list">
+              <div class="fact-item"><div class="fact-icon">🎬</div><div><div class="fact-title">Pre-scored Dialogue (First)</div><div class="fact-desc">Voice actors performed with animatics before drawing began — standard in the US, unprecedented in Japan at the time.</div></div></div>
+              <div class="fact-item"><div class="fact-icon">🎨</div><div><div class="fact-title">Custom Color Creation</div><div class="fact-desc">50 of the 327 colors were custom-created specifically for this film. Night-heavy scenes required extraordinary color complexity.</div></div></div>
+              <div class="fact-item"><div class="fact-icon">💻</div><div><div class="fact-title">Early CGI Integration</div><div class="fact-desc">CGI used for one specific pattern indicator. Computer assistance also calculated object fall trajectories and lens flares.</div></div></div>
+              <div class="fact-item"><div class="fact-icon">🌍</div><div><div class="fact-title">Global Cultural Impact</div><div class="fact-desc">UK debut #3 box office. Early US screenings at MIT, Harvard, UMass on Japanese LaserDiscs — anime became an intellectual pursuit.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: 1990s TV GLOBALIZATION -->
+    <div class="sct" data-n="8">
+      <div class="bg-year">1998</div>
+      <div class="slide-inner flip">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#14b8a6; border-color:rgba(20,184,166,0.4); background:rgba(20,184,166,0.08)">TV Globalization</div>
+          <div class="slide-year">1990s</div>
+          <h2 class="slide-title">Anime Conquers Global Television</h2>
+          <div class="slide-body">
+            <p><strong>Dragon Ball Z</strong> (1989–1996): 291 episodes in Japan. Cartoon Network's Toonami brought it to American audiences beginning <strong>1998</strong> — one of the block's highest-rated shows ever. <strong>Sailor Moon</strong> premiered March 7, 1992 on TV Asahi: 200 episodes, aired in <strong>more than 40 countries</strong> in adapted forms, expanding the anime audience toward young women globally.</p>
+            <p style="margin-top:10px"><strong>Pokémon</strong> premiered April 1, 1997 in Japan; September 1998 on the US WB Network. The "Pokémon Shock" (December 16, 1997): a single episode triggered photosensitive seizures in approximately <strong>685 Japanese viewers</strong>, causing a 4-month suspension — yet paradoxically increased the franchise's global visibility. First Pokémon movie (1999): <strong>$163M worldwide</strong>. Total franchise revenue: over <strong>$150 billion</strong> — the highest-grossing media franchise of all time, ahead of Hello Kitty, Mickey Mouse, and Star Wars.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">$150B+</span><span class="stat-chip-lbl">Pokémon total franchise revenue</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">40+</span><span class="stat-chip-lbl">Countries airing Sailor Moon</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">685</span><span class="stat-chip-lbl">Pokémon Shock viewers affected</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">$163M</span><span class="stat-chip-lbl">First Pokémon movie worldwide</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card" style="pointer-events:all">
+            <div class="visual-card-title">Global Broadcast Expansion</div>
+            <div style="position:relative; background:rgba(0,0,0,0.2); border-radius:12px; overflow:hidden; margin-bottom:12px">
+              <svg viewBox="0 0 1000 500" style="width:100%;height:auto;display:block;opacity:0.9">
+                <rect width="1000" height="500" fill="#07071a"/>
+                <g stroke="#1e1e52" stroke-width="0.5" opacity="0.5">
+                  <line x1="0" y1="250" x2="1000" y2="250"/><line x1="500" y1="0" x2="500" y2="500"/>
+                </g>
+                <g fill="#141440" stroke="#14b8a6" stroke-width="0.8" opacity="0.8">
+                  <path d="M 60,52 C 100,38 175,38 235,62 C 272,80 285,112 278,150 C 268,195 242,228 205,248 C 162,268 118,258 88,235 C 55,210 38,178 38,148 C 36,108 40,70 60,52 Z"/>
+                  <path d="M 158,255 C 185,244 228,252 248,278 C 265,302 262,345 248,385 C 235,418 210,432 182,425 C 155,418 136,390 134,358 C 130,315 138,272 158,255 Z"/>
+                  <path d="M 456,108 C 492,90 548,93 576,120 C 604,148 608,195 602,240 C 596,282 578,315 552,335 C 522,356 488,358 462,340 C 432,320 424,280 426,242 C 428,198 432,158 456,108 Z"/>
+                  <path d="M 570,28 C 648,16 758,14 848,38 C 908,54 948,88 946,142 C 944,188 920,220 888,240 C 850,262 805,262 762,248 C 715,232 672,208 640,185 C 602,158 574,128 566,98 C 558,70 555,44 570,28 Z"/>
+                  <path d="M 715,260 C 760,252 818,260 848,286 C 874,310 876,348 858,374 C 840,398 808,408 772,404 C 735,400 705,382 695,352 C 684,320 692,282 715,260 Z"/>
+                </g>
+                <!-- Pins -->
+                <g>
+                  <circle cx="880" cy="155" r="5" fill="#f43f5e" opacity="0.9"/><text x="890" y="152" fill="rgba(255,255,255,0.7)" font-size="12">🇯🇵 Japan</text>
+                  <circle cx="210" cy="155" r="5" fill="#f43f5e" opacity="0.9"/><text x="220" y="152" fill="rgba(255,255,255,0.7)" font-size="12">🇺🇸 USA</text>
+                  <circle cx="510" cy="160" r="5" fill="#f43f5e" opacity="0.9"/><text x="520" y="157" fill="rgba(255,255,255,0.7)" font-size="12">🇪🇺 Europe</text>
+                  <circle cx="200" cy="310" r="5" fill="#f43f5e" opacity="0.9"/><text x="210" y="307" fill="rgba(255,255,255,0.7)" font-size="12">🌎 LatAm</text>
+                </g>
+              </svg>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px">
+                <div style="font-size:10px;color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;margin-bottom:4px">Dragon Ball Z</div>
+                <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif">80+ countries · Toonami 1998</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:10px">
+                <div style="font-size:10px;color:rgba(255,255,255,0.35);font-family:Inter,sans-serif;margin-bottom:4px">Sailor Moon</div>
+                <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);font-family:Inter,sans-serif">40+ countries adapted</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: 1995-2001 PRESTIGE -->
+    <div class="sct" data-n="9">
+      <div class="bg-year">2001</div>
+      <div class="slide-inner">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#ec4899; border-color:rgba(236,72,153,0.4); background:rgba(236,72,153,0.08)">Cultural Prestige</div>
+          <div class="slide-year">1995 – 2001</div>
+          <h2 class="slide-title">Anime Earns Its Place in Global Cinema</h2>
+          <div class="slide-body">
+            <p><strong>Neon Genesis Evangelion</strong> premiered October 4, 1995 on TV Tokyo — in a children's 6:30pm slot, yet it attracted intense adult intellectual engagement. The theatrical endings Death & Rebirth and The End of Evangelion extended it into cinema events. <strong>Princess Mononoke</strong> (Studio Ghibli, directed by Hayao Miyazaki) premiered July 12, 1997: ¥19.3 billion ($164M equivalent) domestic gross — breaking Steven Spielberg's <em>E.T.</em> long-standing Japan box office record.</p>
+            <p style="margin-top:10px"><strong>Spirited Away</strong> (2001): approximately ¥30.8 billion (~$395M worldwide including re-releases). In 2003, it became the <strong>Academy Award for Best Animated Feature</strong> winner — the first and still only non-English-language film to win that award. Studio Ghibli (founded 1985 by Miyazaki, Takahata, and producer Toshio Suzuki) proved anime could compete at the highest level of global cinema.</p>
+          </div>
+          <div class="slide-quote">
+            "For so long, cartoons have been seen in the West as kind of childish, vulgar, things that you didn't take seriously. When Spirited Away took home the Academy Award, people were starting to say, wow, what's all this about animation that it's considered a real art form." — Dr. Susan Napier
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">¥19.3B</span><span class="stat-chip-lbl">Princess Mononoke box office</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">¥30.8B</span><span class="stat-chip-lbl">Spirited Away worldwide</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">2003</span><span class="stat-chip-lbl">Academy Award — only non-English winner</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">Ghibli Box Office Milestones</div>
+            <div class="fact-list">
+              <div class="fact-item"><div class="fact-icon">🌿</div><div><div class="fact-title">Princess Mononoke (1997)</div><div class="fact-desc">¥19.3 billion domestic. Broke E.T.'s Japan box office record. Was the highest-grossing Japanese film until Spirited Away.</div></div></div>
+              <div class="fact-item"><div class="fact-icon">🐉</div><div><div class="fact-title">Spirited Away (2001)</div><div class="fact-desc">¥30.8 billion worldwide. Still Japan's #1 film. 2003 Academy Award — the only non-English animated film to win.</div></div></div>
+              <div class="fact-item"><div class="fact-icon">🏰</div><div><div class="fact-title">Howl's Moving Castle (2004)</div><div class="fact-desc">~$236M worldwide. Based on Diana Wynne Jones' British novel — yet embodied distinctly Japanese values.</div></div></div>
+              <div class="fact-item"><div class="fact-icon">🌊</div><div><div class="fact-title">Ponyo (2008)</div><div class="fact-desc">~$204M worldwide. Ghibli's consistent record: many hits were original screenplays, not manga adaptations.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: 2000s FAN-SUBBING -->
+    <div class="sct" data-n="10">
+      <div class="bg-year">2005</div>
+      <div class="slide-inner flip">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#6366f1; border-color:rgba(99,102,241,0.4); background:rgba(99,102,241,0.08)">The Fan Network</div>
+          <div class="slide-year">2000s</div>
+          <h2 class="slide-title">Fans Build the Global Audience — Before Anyone Else</h2>
+          <div class="slide-body">
+            <p>Before legal streaming existed, dedicated fans became translators. Fan-sub groups could release subtitled episodes <strong>within hours of Japanese broadcast</strong>, using IRC channels for distribution and BitTorrent for scale. Their translation quality often <em>exceeded official localizations</em>, creating a parallel quality standard that frustrated early legal distributors. Italian communities <strong>Itasa</strong> and <strong>Subspedia</strong> built dedicated platforms — their members were not professional translators, but language enthusiasts driven by passion and community.</p>
+            <p style="margin-top:10px">Scanlation (fan-translation of manga) developed in parallel, with sites like MangaFox and MangaReader hosting hundreds of thousands of chapters. This created an informal "try before you buy" pipeline: fans watched fan-subbed anime, then sought out scanlated manga for more story. Massive international audiences were created <em>before any official platform targeted their markets</em> — essentially running global distribution for free.</p>
+          </div>
+          <div class="slide-quote">
+            "Fans were helping translate right after airing, which allowed everyone from around the world to watch and understand. That created audiences before official releases even happened." — Nia Junod
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">Hours</span><span class="stat-chip-lbl">Episode turnaround after JP broadcast</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">IRC</span><span class="stat-chip-lbl">→ BitTorrent → Global reach</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">Itasa</span><span class="stat-chip-lbl">& Subspedia — Italian communities</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">How Fan Distribution Built Markets</div>
+            <div class="pipeline">
+              <div class="pipeline-row"><div class="pipeline-num">1</div><div><div class="pipeline-text-title">Episode Airs in Japan</div><div class="pipeline-text-desc">Fan-sub teams watch the raw broadcast in real time. Translation begins immediately.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">2</div><div><div class="pipeline-text-title">Within Hours: IRC Release</div><div class="pipeline-text-desc">Subtitled file distributed via IRC bots to hundreds of waiting fans worldwide. Quality often exceeded official dubs.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">3</div><div><div class="pipeline-text-title">BitTorrent Scale-Up</div><div class="pipeline-text-desc">Torrents enabled thousands of simultaneous downloads. Global communities formed around series before official release.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">4</div><div><div class="pipeline-text-title">Audience Exists Before Official Market</div><div class="pipeline-text-desc">When streaming platforms launched, ready-made audiences were already there. Fan-subbing built the market that Crunchyroll monetised.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: 2010s STREAMING -->
+    <div class="sct" data-n="11">
+      <div class="bg-year">2024</div>
+      <div class="slide-inner">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#ec4899; border-color:rgba(236,72,153,0.4); background:rgba(236,72,153,0.08)">The Streaming Revolution</div>
+          <div class="slide-year">2010s – 2020s</div>
+          <h2 class="slide-title">Instantly Global, Simultaneously Everywhere</h2>
+          <div class="slide-body">
+            <p><strong>Crunchyroll</strong> surpassed <strong>15 million paid subscribers</strong> in August 2024 (Arizton). Sony Pictures Entertainment acquired Crunchyroll's parent Funimation in 2021, merging them under the Crunchyroll brand in 2022. <strong>Netflix</strong> reported in its 2025 Fueling a New Era of Global Fandom report that anime viewership exceeded <strong>1 billion global views in 2024</strong>, with over 50% of its global subscriber base engaging with anime content.</p>
+            <p style="margin-top:10px"><em>Simulcasting</em> — releasing episodes globally within hours of Japanese broadcast — became the norm from the early 2010s, replacing the multi-year delays that characterised earlier international distribution. <strong>North America</strong> commands over <strong>38% of global anime streaming revenue</strong>. Streaming platforms generated <strong>$15.0 billion</strong> from anime content in 2024 — the largest single revenue channel. The anime streaming market is projected to cross $14.65 billion (streaming only) by 2030 at a CAGR of ~12%.</p>
+          </div>
+          <div class="slide-quote">
+            "Platforms like Netflix and Crunchyroll have not only changed how fans watch anime but have fundamentally altered the production ecosystem itself." — Dhruva Iyer
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">15M</span><span class="stat-chip-lbl">Crunchyroll paid subs (Aug 2024)</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">1B+</span><span class="stat-chip-lbl">Netflix anime views 2024</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">$15.0B</span><span class="stat-chip-lbl">Streaming revenue 2024</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">38%</span><span class="stat-chip-lbl">North America market share</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">Platform Milestones</div>
+            <div class="milestone-grid">
+              <div class="milestone-card">
+                <div class="milestone-yr">2006</div>
+                <div class="milestone-ttl">Crunchyroll</div>
+                <div class="milestone-desc">Founded. Pivoted to legal streaming 2009. Acquired by Sony for $1.175B in 2021.</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">2014</div>
+                <div class="milestone-ttl">Netflix Anime</div>
+                <div class="milestone-desc">Committed hundreds of millions to anime co-productions. 9.05M Japan subscribers 2024.</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">2022</div>
+                <div class="milestone-ttl">Crunchyroll Merger</div>
+                <div class="milestone-desc">Sony merges Funimation into Crunchyroll. Single dominant platform emerges.</div>
+              </div>
+              <div class="milestone-card">
+                <div class="milestone-yr">2025</div>
+                <div class="milestone-ttl">AnimeJapan</div>
+                <div class="milestone-desc">Netflix announces new co-productions and exclusives. Platform competition intensifies.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 12: 2020s THEATERS -->
+    <div class="sct" data-n="12">
+      <div class="bg-year">2021</div>
+      <div class="slide-inner flip">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#60a5fa; border-color:rgba(96,165,250,0.4); background:rgba(96,165,250,0.08)">Anime in Global Theaters</div>
+          <div class="slide-year">2020s</div>
+          <h2 class="slide-title">Box Office Records Shattered</h2>
+          <div class="slide-body">
+            <p><strong>Demon Slayer: Mugen Train</strong> (2020–21): <strong>$507M worldwide</strong> — the highest-grossing anime film of all time and the highest-grossing film ever in Japan, surpassing Spirited Away's 20-year domestic record. It sold over 41 million tickets globally. The film adapted the Mugen Train arc directly from the manga — a precise example of the Jump serialization-to-film pipeline: serialised manga → dedicated fanbase → anime adaptation → theatrical film.</p>
+            <p style="margin-top:10px"><strong>One Piece Film: Red</strong> (2022): ~$246M worldwide, sold over 10 million tickets in Japan alone. <strong>Suzume</strong> (2022): ~$320M worldwide. <strong>Jujutsu Kaisen 0</strong> (2021): ~$196M worldwide, second-highest opening weekend in Japan at the time. All three manga-based anime franchises simultaneously held the top 3 opening weekend records. Demon Slayer, Jujutsu Kaisen, and One Piece all followed the identical path: <em>serialised Jump manga → anime → film</em>.</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">$507M</span><span class="stat-chip-lbl">Demon Slayer — all-time anime record</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">$320M</span><span class="stat-chip-lbl">Suzume worldwide</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">$246M</span><span class="stat-chip-lbl">One Piece Film: Red</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">$196M</span><span class="stat-chip-lbl">Jujutsu Kaisen 0</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card">
+            <div class="visual-card-title">The Jump-to-Film Pipeline</div>
+            <div class="pipeline">
+              <div class="pipeline-row"><div class="pipeline-num">📖</div><div><div class="pipeline-text-title">Serialise in Weekly Shōnen Jump</div><div class="pipeline-text-desc">Chapters released weekly, gradually attracting a dedicated fanbase. Volume sales prove popularity.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">📺</div><div><div class="pipeline-text-title">Anime Adaptation Announced</div><div class="pipeline-text-desc">After sufficient chapters and proven sales, a studio adaptation is commissioned. Global streaming via simulcast.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">🎥</div><div><div class="pipeline-text-title">Theatrical Film Event</div><div class="pipeline-text-desc">Film adapts a key arc. Existing fans treat theatrical release as a cultural event — not just entertainment. Fandom drives opening weekend.</div></div></div>
+              <div class="pipeline-row"><div class="pipeline-num">🌍</div><div><div class="pipeline-text-title">Global Box Office Record</div><div class="pipeline-text-desc">The three highest-grossing anime films (Demon Slayer, One Piece, JJK) all followed this exact path. Fandom IS the marketing.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 13: MARKET TODAY -->
+    <div class="sct" data-n="13">
+      <div class="bg-year">TODAY</div>
+      <div class="slide-inner">
+        <div class="slide-text">
+          <div class="era-pill" style="color:#818cf8; border-color:rgba(129,140,248,0.4); background:rgba(129,140,248,0.08)">A Global Industry</div>
+          <div class="slide-year">2020s – 2030s</div>
+          <h2 class="slide-title">From ¥550k per Episode to a $102 Billion Industry</h2>
+          <div class="slide-body">
+            <p>The global anime market reached <strong>$38.98 billion in 2025</strong>, projected to reach <strong>$102.99 billion by 2035</strong> at a CAGR of 10.2% (Market Research Future). The manga market: $10.19B (2025) → $43.86B by 2033 at 20.5% CAGR. Anime conventions outside Japan saw <strong>+35% attendance growth</strong>. Japan Tourism Agency: international visitors drawn to anime sites rose from <strong>4.6% (2019) to 7.5% (2023)</strong>. Japan's Cool Japan initiative invested <strong>$827.9 million</strong> through FY2022.</p>
+            <p style="margin-top:10px">Over <strong>70% of households</strong> now access anime through online platforms. More than <strong>50% of new video games</strong> are based on anime. Bandai Namco reported profits of $452M in February 2025, driven by anime-based games. Manga's Asia Pacific market accounts for 84%+ of revenue. The digital segment: 66%+ of manga market share.</p>
+          </div>
+          <div class="slide-quote">
+            "Anime serves as Japan's most potent form of 'soft power,' exporting Japanese language, aesthetics, and social values to an audience that spans every continent." — Dhruva Iyer
+          </div>
+          <div class="stats-row">
+            <div class="stat-chip"><span class="stat-chip-val">$38.98B</span><span class="stat-chip-lbl">Global anime market 2025</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">$102.99B</span><span class="stat-chip-lbl">Projected by 2035</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">+35%</span><span class="stat-chip-lbl">Convention attendance outside Japan</span></div>
+            <div class="stat-chip"><span class="stat-chip-val">7.5%</span><span class="stat-chip-lbl">Intl visitors citing anime (2023)</span></div>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="visual-card" style="pointer-events:all">
+            <div class="visual-card-title">Market Growth 2010–2035</div>
+            <canvas id="marketChart" height="180"></canvas>
+            <div class="kpi-row" style="margin-top:14px">
+              <div class="kpi-card"><div class="kpi-val">10.2%</div><div class="kpi-lbl">CAGR 2025–2035 (anime)</div></div>
+              <div class="kpi-card"><div class="kpi-val">20.5%</div><div class="kpi-lbl">CAGR 2026–2033 (manga)</div></div>
+              <div class="kpi-card"><div class="kpi-val">$827.9M</div><div class="kpi-lbl">Cool Japan investment</div></div>
+              <div class="kpi-card"><div class="kpi-val">$452M</div><div class="kpi-lbl">Bandai Namco profit 2025</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end #content-layer -->
+</div><!-- end #stage -->
+
+</div><!-- end #main-ui -->
+
+<!-- ══ MODAL ══ -->
+<div id="modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   VIDEO INTRO
+════════════════════════════════════════ */
+const videoEl   = document.getElementById('intro-video');
+const videoIntro= document.getElementById('video-intro');
+const mainUI    = document.getElementById('main-ui');
+let videoEnded  = false;
+
+function fadeOutVideo() {
+  if (videoEnded) return;
+  videoEnded = true;
+  // Start both fades simultaneously — no black intermediate screen
+  videoIntro.classList.add('fading');
+  mainUI.classList.add('visible');
+  setTimeout(() => { videoIntro.style.display = 'none'; initPage(); }, 1700);
+}
+
+function skipVideo() { fadeOutVideo(); }
+
+// Fade at 7.5 seconds
+const fadeTimer = setTimeout(fadeOutVideo, 7500);
+
+videoEl.addEventListener('ended',          () => { clearTimeout(fadeTimer); fadeOutVideo(); });
+videoEl.addEventListener('error',          () => { clearTimeout(fadeTimer); fadeOutVideo(); });
+videoEl.addEventListener('loadedmetadata', () => { if (videoEl.duration < 1) { clearTimeout(fadeTimer); fadeOutVideo(); } });
+
+/* ════════════════════════════════════════
+   SLIDE ENGINE
+════════════════════════════════════════ */
+const TOTAL_SLIDES = 14;
+const bgs          = Array.from(document.querySelectorAll('.sbg'));
+const cts          = Array.from(document.querySelectorAll('.sct'));
+const dots         = Array.from(document.querySelectorAll('.snav-dot'));
+const eraLabel     = document.getElementById('era-label');
+const timelineFill = document.getElementById('timeline-fill');
+const timelineLabel= document.getElementById('timeline-label');
+
+const ERA_LABELS = [
+  'Home', '1917 · Origins', '1930s–40s · Wartime', '1950s · Studio Era',
+  '1963 · Astro Boy', '1970s · Media Mix', '1983–88 · OVAs & Franchises',
+  '1988 · Akira', '1990s · TV Global', '1995–2001 · Prestige',
+  '2000s · Fan-Subbing', '2010s · Streaming', '2020s · Theaters', 'Today · Market'
+];
+
+let currentSlideIdx = 0;
+let chartBuilt = false;
+
+// Virtual scroll — wheel-driven, no window.scrollY dependency
+var virtualY = 0;
+var targetY  = 0;
+var animRaf  = null;
+
+function maxScroll() { return (TOTAL_SLIDES - 1) * window.innerHeight; }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function easeInOut(t) { return t * t * (3 - 2 * t); }
+
+function updateSlides() {
+  const vh       = window.innerHeight;
+  const slidePos = virtualY / vh;
+  const rawIdx   = Math.floor(slidePos);
+  const cIdx     = Math.min(rawIdx, TOTAL_SLIDES - 1);
+  const progress = slidePos - rawIdx;
+
+  const t  = progress < 0.25 ? 0 : progress > 0.75 ? 1 : easeInOut((progress - 0.25) / 0.5);
+  const ct = progress < 0.4  ? 0 : progress > 0.6  ? 1 : easeInOut((progress - 0.4)  / 0.2);
+  const nIdx = Math.min(cIdx + 1, TOTAL_SLIDES - 1);
+
+  bgs.forEach((el, i) => {
+    if (i === cIdx)                                   el.style.opacity = 1 - t;
+    else if (i === nIdx && cIdx < TOTAL_SLIDES - 1)   el.style.opacity = t;
+    else                                              el.style.opacity = 0;
+  });
+
+  cts.forEach((el, i) => {
+    if (i === cIdx)                                   el.style.opacity = 1 - ct;
+    else if (i === nIdx && cIdx < TOTAL_SLIDES - 1)   el.style.opacity = ct;
+    else                                              el.style.opacity = 0;
+    el.classList.toggle('active-slide', i === (t > 0.5 ? nIdx : cIdx));
+  });
+
+  const activeIdx = t > 0.5 ? nIdx : cIdx;
+  if (activeIdx !== currentSlideIdx) {
+    currentSlideIdx = activeIdx;
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+    eraLabel.textContent = ERA_LABELS[activeIdx];
+    if (activeIdx === 13 && !chartBuilt) buildChart();
+  }
+
+  const prog = clamp(virtualY / maxScroll(), 0, 1);
+  timelineFill.style.width = (prog * 100) + '%';
+  timelineLabel.textContent = ERA_LABELS[activeIdx];
+}
+
+function animateToTarget() {
+  const diff = targetY - virtualY;
+  if (Math.abs(diff) < 0.5) {
+    virtualY = targetY;
+    updateSlides();
+    animRaf = null;
+    return;
+  }
+  virtualY += diff * 0.1;
+  updateSlides();
+  animRaf = requestAnimationFrame(animateToTarget);
+}
+
+function goTo(px) {
+  targetY = clamp(px, 0, maxScroll());
+  if (!animRaf) animRaf = requestAnimationFrame(animateToTarget);
+}
+
+// Wheel input
+let wheelCooldown = false;
+window.addEventListener('wheel', e => {
+  e.preventDefault();
+  const isMouse = Math.abs(e.deltaY) > 50 || e.deltaMode !== 0;
+  if (isMouse) {
+    if (wheelCooldown) return;
+    const dir = e.deltaY > 0 ? 1 : -1;
+    goTo(clamp(currentSlideIdx + dir, 0, TOTAL_SLIDES - 1) * window.innerHeight);
+    wheelCooldown = true;
+    setTimeout(() => { wheelCooldown = false; }, 700);
+  } else {
+    targetY = clamp(targetY + e.deltaY * 1.5, 0, maxScroll());
+    if (!animRaf) animRaf = requestAnimationFrame(animateToTarget);
+  }
+}, { passive: false });
+
+// Touch support
+let touchStartY = 0;
+window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+window.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const delta = touchStartY - e.touches[0].clientY;
+  touchStartY = e.touches[0].clientY;
+  targetY = clamp(targetY + delta * 2, 0, maxScroll());
+  if (!animRaf) animRaf = requestAnimationFrame(animateToTarget);
+}, { passive: false });
+
+/* Dot navigation */
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    goTo(parseInt(dot.dataset.n) * window.innerHeight);
+  });
+});
+
+/* Keyboard navigation */
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault();
+    goTo(clamp(currentSlideIdx + 1, 0, TOTAL_SLIDES - 1) * window.innerHeight);
+  }
+  if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault();
+    goTo(clamp(currentSlideIdx - 1, 0, TOTAL_SLIDES - 1) * window.innerHeight);
+  }
+  if (e.key === 'Escape') closeModal();
+});
+
+/* ── Chart.js market growth ── */
+function buildChart() {
+  chartBuilt = true;
+  const ctx = document.getElementById('marketChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2010','2013','2016','2019','2022','2025','2028','2031','2035'],
+      datasets: [{
+        label: 'Anime Market ($B)',
+        data: [5.2, 8.4, 13.1, 20.5, 31.2, 38.98, 55, 76, 102.99],
+        borderColor: '#818cf8',
+        backgroundColor: 'rgba(129,140,248,0.12)',
+        borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#818cf8',
+        fill: true, tension: 0.4
+      },{
+        label: 'Manga Market ($B)',
+        data: [2.1, 3.0, 4.8, 6.5, 8.9, 10.19, 17, 28, 43.86],
+        borderColor: '#f472b6',
+        backgroundColor: 'rgba(244,114,182,0.08)',
+        borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#f472b6',
+        fill: true, tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: {
+        legend: { labels: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 10 }, boxWidth: 12 } }
+      },
+      scales: {
+        x: { ticks: { color: 'rgba(255,255,255,0.35)', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { ticks: { color: 'rgba(255,255,255,0.35)', font: { size: 9 }, callback: v => '$' + v + 'B' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      }
+    }
+  });
+}
+
+/* Modal (currently unused — available for future) */
+function openModal(id) {}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+/* ── Init after video ── */
+function initPage() {
+  updateSlides();
+}
+
+// Expose for external control (testing, accessibility)
+window._goTo = goTo;
+window._updateSlides = updateSlides;
+
+// If video errors immediately, show content
+document.addEventListener('DOMContentLoaded', () => {
+  if (!videoEl.src && !videoEl.querySelector('source')) fadeOutVideo();
+});
+</script>
+</body>
+</html>
