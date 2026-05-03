@@ -65,26 +65,208 @@
     }
     .sbg[data-n="0"] { opacity: 1; }
 
-    /* Slide 0: hero */
+    /* Slide 0: hero — anime character collage */
     .sbg[data-n="0"] {
       background-image:
-        linear-gradient(to top, rgba(3,2,9,0.96) 0%, rgba(3,2,9,0.65) 35%, rgba(3,2,9,0.2) 65%, rgba(3,2,9,0) 100%),
+        linear-gradient(to top, rgba(3,2,9,0.97) 0%, rgba(3,2,9,0.62) 32%, rgba(3,2,9,0.15) 62%, rgba(3,2,9,0) 100%),
         url('uploads/459572-9b960201.png');
       background-size: cover; background-position: center 20%;
     }
-    .sbg[data-n="1"]  { background: radial-gradient(ellipse at 80% 20%, rgba(120,70,0,0.35) 0%, #09060000 60%), linear-gradient(160deg, #0e0800 0%, #1a1000 60%, #090600 100%); }
-    .sbg[data-n="2"]  { background: radial-gradient(ellipse at 20% 80%, rgba(120,0,0,0.3) 0%, transparent 60%), linear-gradient(160deg, #0e0000 0%, #1a0505 60%, #090000 100%); }
-    .sbg[data-n="3"]  { background: radial-gradient(ellipse at 80% 80%, rgba(0,80,30,0.3) 0%, transparent 60%), linear-gradient(160deg, #000e05 0%, #001a0d 60%, #000a05 100%); }
-    .sbg[data-n="4"]  { background: radial-gradient(ellipse at 30% 20%, rgba(180,140,0,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0c00 0%, #1a1800 60%, #0a0900 100%); }
-    .sbg[data-n="5"]  { background: radial-gradient(ellipse at 70% 30%, rgba(160,60,0,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0400 0%, #1a0800 60%, #0a0300 100%); }
-    .sbg[data-n="6"]  { background: radial-gradient(ellipse at 20% 70%, rgba(0,30,120,0.35) 0%, transparent 60%), linear-gradient(160deg, #00000e 0%, #000018 60%, #00000a 100%); }
-    .sbg[data-n="7"]  { background: radial-gradient(ellipse at 50% 50%, rgba(80,0,160,0.4) 0%, transparent 55%), linear-gradient(160deg, #08001a 0%, #130030 60%, #08001a 100%); }
-    .sbg[data-n="8"]  { background: radial-gradient(ellipse at 80% 20%, rgba(0,100,100,0.3) 0%, transparent 60%), linear-gradient(160deg, #000d0d 0%, #001818 60%, #000a0a 100%); }
-    .sbg[data-n="9"]  { background: radial-gradient(ellipse at 20% 80%, rgba(140,0,40,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0005 0%, #1a000a 60%, #0a0003 100%); }
-    .sbg[data-n="10"] { background: radial-gradient(ellipse at 70% 50%, rgba(20,40,100,0.3) 0%, transparent 60%), linear-gradient(160deg, #030614 0%, #060d24 60%, #030614 100%); }
-    .sbg[data-n="11"] { background: radial-gradient(ellipse at 30% 30%, rgba(160,0,80,0.3) 0%, transparent 60%), linear-gradient(160deg, #0d0008 0%, #1a0010 60%, #0d0008 100%); }
-    .sbg[data-n="12"] { background: radial-gradient(ellipse at 60% 60%, rgba(0,20,140,0.4) 0%, transparent 55%), linear-gradient(160deg, #000510 0%, #000a20 60%, #000510 100%); }
-    .sbg[data-n="13"] { background: radial-gradient(ellipse at 50% 50%, rgba(60,0,120,0.25) 0%, transparent 55%), linear-gradient(160deg, #030108 0%, #060312 60%, #030108 100%); }
+    /* Slide 1: 1910s-20s — early celluloid film strip (sepia, horizontal scan lines) */
+    .sbg[data-n="1"] {
+      background:
+        repeating-linear-gradient(0deg, transparent 0px, transparent 38px, rgba(0,0,0,0.18) 38px, rgba(0,0,0,0.18) 40px),
+        repeating-linear-gradient(90deg, rgba(180,120,40,0.035) 0px, rgba(180,120,40,0.035) 1px, transparent 1px, transparent 120px),
+        radial-gradient(ellipse at 50% 8%, rgba(210,150,40,0.22) 0%, transparent 58%),
+        linear-gradient(175deg, #100a00 0%, #1e1300 45%, #130c00 100%);
+    }
+    /* Slide 2: 1930s-40s — wartime propaganda (harsh diagonal hatching, deep crimson) */
+    .sbg[data-n="2"] {
+      background:
+        repeating-linear-gradient(-45deg, rgba(180,0,0,0.065) 0px, rgba(180,0,0,0.065) 1px, transparent 1px, transparent 18px),
+        radial-gradient(ellipse at 12% 48%, rgba(200,0,0,0.38) 0%, transparent 48%),
+        radial-gradient(ellipse at 88% 88%, rgba(110,0,0,0.2) 0%, transparent 42%),
+        linear-gradient(170deg, #130000 0%, #1f0505 50%, #0f0000 100%);
+    }
+    /* Slide 3: 1950s — Tōei modernist (bold geometry, forest green) */
+    .sbg[data-n="3"] {
+      background:
+        radial-gradient(circle at 88% 12%, rgba(0,200,90,0.17) 0%, transparent 38%),
+        radial-gradient(circle at 12% 88%, rgba(0,130,60,0.22) 0%, transparent 42%),
+        radial-gradient(ellipse at 55% 55%, rgba(0,90,40,0.1) 0%, transparent 68%),
+        linear-gradient(160deg, #000f06 0%, #001c0b 50%, #000f06 100%);
+    }
+    /* Slide 4: 1963 Astro Boy — CRT television (scanlines, amber phosphor glow) */
+    .sbg[data-n="4"] {
+      background:
+        repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(230,165,0,0.033) 3px, rgba(230,165,0,0.033) 4px),
+        radial-gradient(ellipse at 50% 32%, rgba(248,185,0,0.28) 0%, rgba(185,115,0,0.13) 32%, transparent 63%),
+        radial-gradient(ellipse at 28% 82%, rgba(125,72,0,0.14) 0%, transparent 42%),
+        linear-gradient(160deg, #0d0a00 0%, #1c1400 50%, #0d0a00 100%);
+    }
+    /* Slide 5: 1970s — Space Battleship Yamato (star field, deep navy-purple) */
+    .sbg[data-n="5"] {
+      background:
+        radial-gradient(circle at 22% 28%, rgba(255,255,255,0.014) 0px, rgba(255,255,255,0.014) 1px, transparent 1px, transparent 35px) 0 0 / 35px 35px,
+        radial-gradient(circle at 68% 72%, rgba(255,255,255,0.011) 0px, rgba(255,255,255,0.011) 1px, transparent 1px, transparent 54px) 0 0 / 54px 54px,
+        radial-gradient(ellipse at 72% 22%, rgba(40,72,210,0.38) 0%, transparent 50%),
+        radial-gradient(ellipse at 22% 78%, rgba(105,0,168,0.24) 0%, transparent 50%),
+        linear-gradient(170deg, #00000e 0%, #000410 50%, #00000e 100%);
+    }
+    /* Slide 6: 1983-88 OVAs — synthwave (perspective teal grid, neon) */
+    .sbg[data-n="6"] {
+      background:
+        repeating-linear-gradient(90deg, rgba(0,225,225,0.042) 0px, rgba(0,225,225,0.042) 1px, transparent 1px, transparent 55px),
+        repeating-linear-gradient(0deg, transparent 0px, transparent 54px, rgba(0,185,185,0.028) 54px, rgba(0,185,185,0.028) 55px),
+        radial-gradient(ellipse at 50% 108%, rgba(0,205,205,0.26) 0%, transparent 44%),
+        radial-gradient(ellipse at 82% 12%, rgba(185,0,185,0.14) 0%, transparent 38%),
+        linear-gradient(185deg, #000009 0%, #000c12 50%, #000508 100%);
+    }
+    /* Slide 7: 1988 Akira — Neo-Tokyo cyberpunk (city grid, crimson-black) */
+    .sbg[data-n="7"] {
+      background:
+        repeating-linear-gradient(90deg, rgba(225,0,32,0.042) 0px, rgba(225,0,32,0.042) 1px, transparent 1px, transparent 72px),
+        repeating-linear-gradient(0deg, rgba(225,0,32,0.028) 0px, rgba(225,0,32,0.028) 1px, transparent 1px, transparent 72px),
+        radial-gradient(ellipse at 50% 112%, rgba(225,0,42,0.52) 0%, transparent 50%),
+        radial-gradient(ellipse at 82% 18%, rgba(105,0,185,0.18) 0%, transparent 38%),
+        linear-gradient(180deg, #090009 0%, #140008 100%);
+    }
+    /* Slide 8: 1990s — global TV (teal ocean tones, world broadcast) */
+    .sbg[data-n="8"] {
+      background:
+        radial-gradient(ellipse at 80% 16%, rgba(0,148,168,0.32) 0%, transparent 48%),
+        radial-gradient(ellipse at 20% 84%, rgba(0,88,128,0.22) 0%, transparent 48%),
+        radial-gradient(ellipse at 50% 50%, rgba(0,65,82,0.1) 0%, transparent 68%),
+        linear-gradient(160deg, #000d0f 0%, #001418 50%, #000d0f 100%);
+    }
+    /* Slide 9: 1995-2001 — prestige (Ghibli forest + Eva ethereal, deep rose-maroon) */
+    .sbg[data-n="9"] {
+      background:
+        radial-gradient(ellipse at 38% 22%, rgba(205,0,125,0.13) 0%, transparent 44%),
+        radial-gradient(ellipse at 28% 72%, rgba(128,0,65,0.32) 0%, transparent 50%),
+        radial-gradient(ellipse at 88% 48%, rgba(85,0,42,0.17) 0%, transparent 44%),
+        linear-gradient(170deg, #0e0008 0%, #1a0012 50%, #0e0008 100%);
+    }
+    /* Slide 10: 2000s fan-subs — digital/IRC terminal (green grid, data stream) */
+    .sbg[data-n="10"] {
+      background:
+        repeating-linear-gradient(90deg, rgba(0,225,100,0.028) 0px, rgba(0,225,100,0.028) 1px, transparent 1px, transparent 42px),
+        repeating-linear-gradient(0deg, rgba(0,225,100,0.022) 0px, rgba(0,225,100,0.022) 1px, transparent 1px, transparent 42px),
+        radial-gradient(ellipse at 72% 22%, rgba(0,128,58,0.27) 0%, transparent 50%),
+        linear-gradient(160deg, #000b05 0%, #001109 50%, #000b05 100%);
+    }
+    /* Slide 11: 2010s streaming — rich purple-violet (streaming era UI) */
+    .sbg[data-n="11"] {
+      background:
+        radial-gradient(ellipse at 64% 16%, rgba(155,0,228,0.32) 0%, transparent 48%),
+        radial-gradient(ellipse at 18% 82%, rgba(82,0,148,0.22) 0%, transparent 48%),
+        radial-gradient(ellipse at 88% 82%, rgba(42,0,85,0.17) 0%, transparent 44%),
+        linear-gradient(160deg, #080010 0%, #100018 50%, #080010 100%);
+    }
+    /* Slide 12: 2020s theaters — IMAX dark (spotlight, deep indigo) */
+    .sbg[data-n="12"] {
+      background:
+        radial-gradient(ellipse at 50% -5%, rgba(22,82,228,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 125%, rgba(0,22,85,0.42) 0%, transparent 45%),
+        radial-gradient(ellipse at 88% 50%, rgba(0,12,62,0.2) 0%, transparent 44%),
+        linear-gradient(180deg, #000110 0%, #00091c 100%);
+    }
+    /* Slide 13: today/market — data constellation (point cloud, near-black) */
+    .sbg[data-n="13"] {
+      background:
+        radial-gradient(circle at 17% 14%, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 48px) 0 0 / 48px 48px,
+        radial-gradient(circle at 77% 63%, rgba(255,255,255,0.008) 0px, rgba(255,255,255,0.008) 1px, transparent 1px, transparent 70px) 0 0 / 70px 70px,
+        radial-gradient(ellipse at 50% 50%, rgba(72,0,145,0.22) 0%, transparent 60%),
+        linear-gradient(160deg, #030109 0%, #060212 50%, #030109 100%);
+    }
+    /* Slide 14: world map — ocean coordinates (latitude/longitude grid, deep ocean) */
+    .sbg[data-n="14"] {
+      background:
+        repeating-linear-gradient(0deg, rgba(32,82,200,0.042) 0px, rgba(32,82,200,0.042) 1px, transparent 1px, transparent 31px),
+        repeating-linear-gradient(90deg, rgba(32,82,200,0.032) 0px, rgba(32,82,200,0.032) 1px, transparent 1px, transparent 47px),
+        radial-gradient(ellipse at 50% 50%, rgba(0,32,125,0.52) 0%, rgba(0,8,42,0.88) 100%),
+        linear-gradient(180deg, #000614 0%, #000314 100%);
+    }
+
+    /* ── World Map Slide ── */
+    .map-slide-wrap {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      padding: 80px 48px 0;
+      pointer-events: none;
+    }
+    .map-header { text-align: center; margin-bottom: 24px; pointer-events: none; }
+    .map-title {
+      font-family: 'Bodoni Moda', serif; font-weight: 900;
+      font-size: clamp(28px, 3.5vw, 48px); color: #fff;
+      letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .map-subtitle {
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      color: rgba(255,255,255,0.45); letter-spacing: 0.04em;
+    }
+    .map-container {
+      position: relative; width: 100%; max-width: 1280px;
+      flex: 1; pointer-events: all;
+    }
+    .world-svg { width: 100%; height: auto; display: block; }
+    .world-svg .land { fill: #122845; stroke: #2a5080; stroke-width: 0.8; transition: fill 0.2s; }
+    .world-svg .land:hover { fill: #1c3d62; }
+    .world-svg .ocean-bg { fill: #040c1e; }
+    .world-svg .grid { stroke: #162540; stroke-width: 0.5; }
+    .world-svg .equator { stroke: #1e3858; stroke-width: 1; }
+    .world-svg .arc { fill: none; stroke: rgba(59,130,246,0.6); stroke-width: 2; stroke-dasharray: 6 4; }
+    .world-svg .arc-origin { stroke: rgba(239,68,68,0.75); }
+
+    /* Pin markers */
+    .map-pin { cursor: pointer; pointer-events: all; filter: drop-shadow(0 0 5px rgba(59,130,246,0.7)); }
+    .map-pin.origin { filter: drop-shadow(0 0 7px rgba(239,68,68,0.85)); }
+    .map-pin .pin-ring {
+      fill: none; stroke-width: 1.5;
+      animation: pin-pulse-ring 2.4s ease-out infinite;
+    }
+    .map-pin.origin .pin-ring { stroke: rgba(239,68,68,0.7); }
+    .map-pin.intl   .pin-ring { stroke: rgba(59,130,246,0.7); }
+    @keyframes pin-pulse-ring {
+      0%   { r: 10; opacity: 0.85; }
+      100% { r: 28; opacity: 0; }
+    }
+    .map-pin .pin-dot { transition: r 0.2s; }
+    .map-pin:hover { filter: drop-shadow(0 0 10px rgba(59,130,246,1)); }
+    .map-pin.origin:hover { filter: drop-shadow(0 0 12px rgba(239,68,68,1)); }
+    .map-pin:hover .pin-dot { r: 8; }
+
+    /* Popup */
+    #map-popup {
+      position: absolute; width: 295px; z-index: 200;
+      background: rgba(4,10,26,0.97);
+      border: 1px solid rgba(59,130,246,0.35);
+      border-radius: 14px; padding: 18px 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 40px rgba(0,20,80,0.55), 0 0 0 1px rgba(59,130,246,0.18);
+      pointer-events: none; opacity: 0;
+      transition: opacity 0.18s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    #map-popup.vis { opacity: 1; }
+    .pp-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .pp-flag { font-size: 26px; line-height: 1; }
+    .pp-name { font-weight: 700; font-size: 14px; color: #fff; }
+    .pp-sub  { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+    .pp-stats { display: flex; gap: 8px; margin-bottom: 14px; }
+    .pp-stat {
+      flex: 1; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 8px 6px; text-align: center;
+    }
+    .pp-stat-val { font-size: 13px; font-weight: 700; color: #60a5fa; display: block; }
+    .pp-stat-lbl { font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; margin-top: 2px; display: block; }
+    .pp-tl-title { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
+    .pp-tl-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 7px; }
+    .pp-tl-year { font-size: 10px; font-weight: 700; color: #3b82f6; min-width: 38px; padding-top: 1px; }
+    .pp-tl-event { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .pp-titles { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.07); }
 
     /* Content layers */
     #content-layer { position: absolute; inset: 0; }
@@ -414,6 +596,7 @@
   <button class="snav-dot"        data-n="11" data-label="2010s · Streaming"></button>
   <button class="snav-dot"        data-n="12" data-label="2020s · Theaters"></button>
   <button class="snav-dot"        data-n="13" data-label="Today · Market"></button>
+  <button class="snav-dot"        data-n="14" data-label="World · Impact Map"></button>
 </div>
 
 <!-- TIMELINE BAR -->
@@ -441,6 +624,7 @@
     <div class="sbg" data-n="11"></div>
     <div class="sbg" data-n="12"></div>
     <div class="sbg" data-n="13"></div>
+    <div class="sbg" data-n="14"></div>
   </div>
 
   <!-- ── CONTENT LAYERS ── -->
@@ -1002,6 +1186,188 @@
       </div>
     </div>
 
+    <!-- SLIDE 14: WORLD IMPACT MAP -->
+    <div class="sct" data-n="14">
+      <div class="map-slide-wrap">
+        <div class="map-header">
+          <div class="era-pill" style="color:#3b82f6;border-color:rgba(59,130,246,0.4);background:rgba(59,130,246,0.08)">Global Impact</div>
+          <h2 class="map-title">Anime's World</h2>
+          <p class="map-subtitle">Hover a pin to explore how anime entered and transformed each regional market</p>
+        </div>
+        <div class="map-container" id="map-container">
+
+          <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" class="world-svg" id="world-svg">
+            <defs>
+              <radialGradient id="glow-r" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="pin-glow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Ocean -->
+            <rect class="ocean-bg" width="1000" height="500"/>
+
+            <!-- Lat/Lon grid -->
+            <g class="grid">
+              <line x1="0" y1="83"  x2="1000" y2="83"/>
+              <line x1="0" y1="139" x2="1000" y2="139"/>
+              <line x1="0" y1="167" x2="1000" y2="167"/>
+              <line x1="0" y1="194" x2="1000" y2="194"/>
+              <line x1="0" y1="222" x2="1000" y2="222"/>
+              <line x1="0" y1="278" x2="1000" y2="278"/>
+              <line x1="0" y1="306" x2="1000" y2="306"/>
+              <line x1="0" y1="333" x2="1000" y2="333"/>
+              <line x1="0" y1="388" x2="1000" y2="388"/>
+              <line x1="167" y1="0" x2="167" y2="500"/>
+              <line x1="250" y1="0" x2="250" y2="500"/>
+              <line x1="333" y1="0" x2="333" y2="500"/>
+              <line x1="417" y1="0" x2="417" y2="500"/>
+              <line x1="583" y1="0" x2="583" y2="500"/>
+              <line x1="667" y1="0" x2="667" y2="500"/>
+              <line x1="750" y1="0" x2="750" y2="500"/>
+              <line x1="833" y1="0" x2="833" y2="500"/>
+              <line x1="917" y1="0" x2="917" y2="500"/>
+            </g>
+            <line class="equator" x1="0" y1="250" x2="1000" y2="250"/>
+
+            <!-- ── Continent shapes ── -->
+            <!-- North America -->
+            <path class="land" d="M 56,86 C 78,65 118,57 152,64 C 186,70 215,65 245,76 C 264,84 278,78 293,97 C 299,117 295,140 284,160 C 270,187 256,218 238,250 C 220,280 203,286 186,273 C 165,256 152,232 138,210 C 118,182 98,157 78,131 C 63,113 49,98 56,86 Z"/>
+            <!-- Greenland -->
+            <path class="land" d="M 327,32 C 350,21 380,20 400,33 C 415,46 415,63 404,78 C 391,92 370,97 348,92 C 323,85 310,70 313,54 Z"/>
+            <!-- Iceland -->
+            <path class="land" d="M 440,72 C 447,65 456,65 460,72 C 464,80 459,90 450,93 C 441,96 434,89 436,80 Z"/>
+            <!-- South America -->
+            <path class="land" d="M 228,268 C 248,255 270,260 284,278 C 302,300 318,328 330,358 C 342,388 346,418 336,444 C 323,460 304,460 290,444 C 270,424 256,400 249,374 C 239,344 234,312 235,284 Z"/>
+            <!-- Europe (Western + Central merged) -->
+            <path class="land" d="M 460,145 C 465,122 475,110 490,105 C 506,100 522,103 536,113 C 548,122 558,115 568,110 C 580,106 592,112 600,124 C 608,138 601,155 588,163 C 573,172 553,174 536,167 C 518,160 506,149 494,153 C 480,159 468,160 462,150 Z"/>
+            <!-- UK -->
+            <path class="land" d="M 476,90 C 485,80 498,78 507,87 C 515,96 512,110 500,117 C 489,124 475,120 469,109 Z"/>
+            <!-- Ireland -->
+            <path class="land" d="M 462,95 C 468,88 476,88 480,95 C 484,103 479,112 471,114 C 463,116 457,108 462,95 Z"/>
+            <!-- Iberian Peninsula -->
+            <path class="land" d="M 458,150 C 463,128 474,113 489,107 C 506,101 521,108 526,123 C 531,140 524,157 511,165 C 497,174 480,172 469,161 Z"/>
+            <!-- Scandinavia -->
+            <path class="land" d="M 503,84 C 514,68 528,58 541,55 C 554,52 564,61 567,76 C 570,92 559,107 544,114 C 529,120 514,114 506,100 Z"/>
+            <!-- Italian Peninsula -->
+            <path class="land" d="M 520,148 C 528,140 540,137 546,147 C 552,160 547,178 533,184 C 519,190 509,179 512,163 Z"/>
+            <!-- Africa -->
+            <path class="land" d="M 462,170 C 474,152 491,146 510,150 C 528,154 543,170 552,192 C 564,218 568,248 564,278 C 558,314 546,348 526,374 C 505,400 482,414 461,406 C 439,396 426,375 422,350 C 416,320 422,288 430,260 C 440,232 450,208 455,185 Z"/>
+            <!-- Arabian Peninsula -->
+            <path class="land" d="M 572,168 C 584,152 601,146 618,152 C 635,160 643,181 640,204 C 636,227 620,245 600,249 C 579,253 562,236 558,215 C 554,192 559,177 572,168 Z"/>
+            <!-- India -->
+            <path class="land" d="M 694,180 C 708,166 724,163 737,173 C 751,187 753,211 746,236 C 738,262 719,276 700,272 C 680,267 668,248 671,224 C 674,199 681,186 694,180 Z"/>
+            <!-- Sri Lanka -->
+            <path class="land" d="M 722,268 C 727,262 734,263 736,270 C 738,278 734,286 727,288 C 720,290 715,282 718,274 Z"/>
+            <!-- Russia / Eurasia (large simplified blob) -->
+            <path class="land" d="M 558,60 C 602,48 664,42 732,44 C 802,46 862,57 902,74 C 922,86 922,105 903,121 C 881,138 848,143 812,134 C 774,124 736,108 698,98 C 660,88 620,78 584,72 C 564,68 554,66 558,63 Z"/>
+            <!-- East Asia (China region) -->
+            <path class="land" d="M 792,114 C 812,106 834,109 852,124 C 872,141 878,164 870,188 C 860,214 838,228 812,223 C 785,217 768,199 766,174 C 763,148 773,122 792,114 Z"/>
+            <!-- Korean Peninsula -->
+            <path class="land" d="M 855,148 C 864,140 875,142 880,153 C 886,166 881,182 869,187 C 856,192 844,183 842,170 Z"/>
+            <!-- Japan (Honshu + Kyushu) -->
+            <path class="land" d="M 876,138 C 886,128 899,128 907,139 C 915,152 910,170 897,178 C 883,186 870,180 864,166 C 858,151 865,143 876,138 Z"/>
+            <!-- Hokkaido -->
+            <path class="land" d="M 892,120 C 901,113 912,115 917,125 C 921,136 915,147 904,150 C 893,153 884,146 884,134 Z"/>
+            <!-- Southeast Asia (Indochina/Malay) -->
+            <path class="land" d="M 765,218 C 780,206 802,208 816,224 C 831,242 831,268 817,285 C 800,304 773,307 756,293 C 738,277 738,252 748,235 Z"/>
+            <!-- Philippines -->
+            <path class="land" d="M 843,200 C 854,192 867,195 873,211 C 880,229 873,252 858,260 C 842,268 826,259 821,243 C 816,224 829,208 843,200 Z"/>
+            <!-- Indonesia (simplified) -->
+            <path class="land" d="M 766,264 C 792,256 826,260 854,271 C 880,282 892,303 882,323 C 870,342 844,349 816,340 C 787,331 762,314 753,293 C 742,272 743,270 766,264 Z"/>
+            <!-- Australia -->
+            <path class="land" d="M 800,347 C 826,332 860,328 891,338 C 922,348 942,370 943,396 C 944,422 928,446 904,456 C 878,466 847,462 820,447 C 791,430 774,406 773,381 C 772,356 778,357 800,347 Z"/>
+            <!-- New Zealand -->
+            <path class="land" d="M 960,392 C 968,382 980,383 985,394 C 990,406 984,420 974,424 C 963,428 952,420 951,408 Z"/>
+
+            <!-- ── Connection arcs from Japan (885,152) ── -->
+            <g opacity="0.6">
+              <!-- Japan → USA (curves north over Pacific) -->
+              <path class="arc arc-origin" d="M 885,152 Q 700,20 230,165"/>
+              <!-- Japan → France (curves north) -->
+              <path class="arc" d="M 885,152 Q 700,30 503,122"/>
+              <!-- Japan → Italy -->
+              <path class="arc" d="M 885,152 Q 710,45 525,148"/>
+              <!-- Japan → MENA -->
+              <path class="arc" d="M 885,152 Q 760,80 628,192"/>
+              <!-- Japan → Brazil -->
+              <path class="arc" d="M 885,152 Q 600,100 308,315"/>
+              <!-- Japan → SEA (Philippines) -->
+              <path class="arc" d="M 885,152 Q 870,190 850,228"/>
+              <!-- Japan → Korea (very short) -->
+              <path class="arc" d="M 885,152 Q 872,155 860,162"/>
+            </g>
+
+            <!-- ── Interactive Pin Markers ── -->
+            <!-- Japan (origin — RED) -->
+            <g class="map-pin origin" data-region="japan" transform="translate(885,152)">
+              <circle class="pin-ring" r="10" stroke="rgba(239,68,68,0.7)" fill="none" stroke-width="1.5" style="animation-delay:0s"/>
+              <circle r="9"  fill="rgba(239,68,68,0.18)" stroke="rgba(239,68,68,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#ef4444"/>
+            </g>
+            <!-- USA -->
+            <g class="map-pin intl" data-region="usa" transform="translate(230,165)">
+              <circle class="pin-ring" r="10" stroke="rgba(59,130,246,0.7)" fill="none" stroke-width="1.5" style="animation-delay:0.3s"/>
+              <circle r="9"  fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#60a5fa"/>
+            </g>
+            <!-- France -->
+            <g class="map-pin intl" data-region="france" transform="translate(503,122)">
+              <circle class="pin-ring" r="10" stroke="rgba(59,130,246,0.7)" fill="none" stroke-width="1.5" style="animation-delay:0.5s"/>
+              <circle r="9"  fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#60a5fa"/>
+            </g>
+            <!-- Italy -->
+            <g class="map-pin intl" data-region="italy" transform="translate(525,148)">
+              <circle class="pin-ring" r="10" stroke="rgba(59,130,246,0.7)" fill="none" stroke-width="1.5" style="animation-delay:0.7s"/>
+              <circle r="9"  fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#60a5fa"/>
+            </g>
+            <!-- Latin America (Brazil) -->
+            <g class="map-pin intl" data-region="latam" transform="translate(308,315)">
+              <circle class="pin-ring" r="10" stroke="rgba(59,130,246,0.7)" fill="none" stroke-width="1.5" style="animation-delay:0.9s"/>
+              <circle r="9"  fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#60a5fa"/>
+            </g>
+            <!-- Southeast Asia (Philippines) -->
+            <g class="map-pin intl" data-region="seasia" transform="translate(850,228)">
+              <circle class="pin-ring" r="10" stroke="rgba(59,130,246,0.7)" fill="none" stroke-width="1.5" style="animation-delay:1.1s"/>
+              <circle r="9"  fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#60a5fa"/>
+            </g>
+            <!-- South Korea -->
+            <g class="map-pin intl" data-region="korea" transform="translate(860,162)">
+              <circle class="pin-ring" r="10" stroke="rgba(59,130,246,0.7)" fill="none" stroke-width="1.5" style="animation-delay:1.3s"/>
+              <circle r="9"  fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#60a5fa"/>
+            </g>
+            <!-- MENA (Saudi Arabia) -->
+            <g class="map-pin intl" data-region="mena" transform="translate(628,192)">
+              <circle class="pin-ring" r="10" stroke="rgba(59,130,246,0.7)" fill="none" stroke-width="1.5" style="animation-delay:1.5s"/>
+              <circle r="9"  fill="rgba(59,130,246,0.15)" stroke="rgba(59,130,246,0.9)" stroke-width="1.8"/>
+              <circle class="pin-dot" r="5" fill="#60a5fa"/>
+            </g>
+          </svg>
+
+          <!-- Popup -->
+          <div id="map-popup">
+            <div class="pp-head">
+              <div class="pp-flag" id="pp-flag"></div>
+              <div><div class="pp-name" id="pp-name"></div><div class="pp-sub" id="pp-sub"></div></div>
+            </div>
+            <div class="pp-stats" id="pp-stats"></div>
+            <div class="pp-tl-title">Key Milestones</div>
+            <div id="pp-timeline"></div>
+            <div class="pp-titles" id="pp-titles"></div>
+          </div>
+        </div><!-- end map-container -->
+      </div><!-- end map-slide-wrap -->
+    </div>
+
   </div><!-- end #content-layer -->
 </div><!-- end #stage -->
 
@@ -1045,7 +1411,7 @@ videoEl.addEventListener('loadedmetadata', () => { if (videoEl.duration < 1) { c
 /* ════════════════════════════════════════
    SLIDE ENGINE
 ════════════════════════════════════════ */
-const TOTAL_SLIDES = 14;
+const TOTAL_SLIDES = 15;
 const bgs          = Array.from(document.querySelectorAll('.sbg'));
 const cts          = Array.from(document.querySelectorAll('.sct'));
 const dots         = Array.from(document.querySelectorAll('.snav-dot'));
@@ -1057,7 +1423,8 @@ const ERA_LABELS = [
   'Home', '1917 · Origins', '1930s–40s · Wartime', '1950s · Studio Era',
   '1963 · Astro Boy', '1970s · Media Mix', '1983–88 · OVAs & Franchises',
   '1988 · Akira', '1990s · TV Global', '1995–2001 · Prestige',
-  '2000s · Fan-Subbing', '2010s · Streaming', '2020s · Theaters', 'Today · Market'
+  '2000s · Fan-Subbing', '2010s · Streaming', '2020s · Theaters', 'Today · Market',
+  'World · Impact Map'
 ];
 
 let currentSlideIdx = 0;
@@ -1217,9 +1584,166 @@ function buildChart() {
 function openModal(id) {}
 function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
 
+/* ── World Map Popup ── */
+const REGION_DATA = {
+  japan: {
+    name: 'Japan', flag: '🇯🇵', subtitle: 'Origin Market',
+    stats: [{ val:'¥1.1T', lbl:'Domestic market' },{ val:'#1', lbl:'Global producer' },{ val:'13,000+', lbl:'Manga titles in print' }],
+    timeline: [
+      { year:'1917', event:'First animated films — Shimokawa, Kitayama & Kōuchi' },
+      { year:'1963', event:'Astro Boy launches the TV anime model' },
+      { year:'1970s', event:'Manga-anime media mix becomes dominant' },
+      { year:'1985', event:'Studio Ghibli founded by Miyazaki & Takahata' },
+      { year:'1988', event:'Akira proves anime is prestige cinema globally' },
+      { year:'2023', event:'Demon Slayer grosses $507M worldwide' }
+    ],
+    titles: 'One Piece · Naruto · Demon Slayer · Dragon Ball'
+  },
+  usa: {
+    name: 'USA / North America', flag: '🇺🇸', subtitle: 'Largest International Market',
+    stats: [{ val:'$2B+', lbl:'Annual revenue (2023)' },{ val:'15M+', lbl:'Crunchyroll subscribers' },{ val:'$1.175B', lbl:'Sony paid for Crunchyroll' }],
+    timeline: [
+      { year:'1963', event:'Astro Boy airs on NBC — first anime on US TV' },
+      { year:'1987', event:'Robotech syndication builds adult fanbase' },
+      { year:'1997', event:'Cartoon Network Toonami anime block launched' },
+      { year:'1998', event:'Pokémon & Dragon Ball Z transform mainstream' },
+      { year:'2006', event:'Crunchyroll founded in Dallas, Texas' },
+      { year:'2021', event:'Sony acquires Crunchyroll for $1.175 billion' }
+    ],
+    titles: 'Dragon Ball Z · Pokémon · Naruto · Attack on Titan'
+  },
+  france: {
+    name: 'France / Western Europe', flag: '🇫🇷', subtitle: '2nd Largest Manga Market Globally',
+    stats: [{ val:'45M', lbl:'Manga volumes sold (France 2022)' },{ val:'275K', lbl:'Japan Expo Paris visitors' },{ val:'#2', lbl:'Global manga market rank' }],
+    timeline: [
+      { year:'1978', event:'Goldorak (Grendizer) premieres on TF1 — instant sensation' },
+      { year:'1988', event:'Dragon Ball arrives via AB Production' },
+      { year:'2000', event:'Japan Expo Paris — largest anime event outside Asia' },
+      { year:'2015', event:'Crunchyroll France confirms market maturity' },
+      { year:'2022', event:'France surpasses USA as world\'s #2 manga market' }
+    ],
+    titles: 'Goldorak · Dragon Ball · Naruto · One Piece'
+  },
+  italy: {
+    name: 'Italy', flag: '🇮🇹', subtitle: 'The 1970s–80s Anime Epicenter',
+    stats: [{ val:'200+', lbl:'Anime series aired by 1985' },{ val:'50M', lbl:'Goldrake viewers per episode' },{ val:'#1', lbl:'Most anime outside Japan (1980s)' }],
+    timeline: [
+      { year:'1975', event:'Mazinga Z (Mazinger Z) airs — triggers Italian anime boom' },
+      { year:'1978', event:'Goldrake (Grendizer) — 50M viewers per episode' },
+      { year:'1980', event:'Italy broadcasts more anime than any country except Japan' },
+      { year:'1982', event:'Capitan Harlock & Candy Candy become cultural institutions' },
+      { year:'1985', event:'Italy leads Europe in anime dubbing industry' }
+    ],
+    titles: 'Mazinga Z · Goldrake · Candy Candy · Capitan Harlock'
+  },
+  latam: {
+    name: 'Latin America', flag: '🌎', subtitle: 'Crunchyroll\'s 3rd Largest Market',
+    stats: [{ val:'40M+', lbl:'Anime viewers in Brazil alone' },{ val:'Top 5', lbl:'Brazil global market rank' },{ val:'#3', lbl:'Crunchyroll regional market' }],
+    timeline: [
+      { year:'1988', event:'Candy Candy airs in Brazil — first major anime hit' },
+      { year:'1994', event:'Dragon Ball Z on Mexican Televisa — cultural explosion' },
+      { year:'1999', event:'Pokémon sweeps all of Latin America' },
+      { year:'2012', event:'Crunchyroll expands to Latin America' },
+      { year:'2022', event:'Brazil ranks among world\'s top 5 anime markets' }
+    ],
+    titles: 'Dragon Ball Z · Pokémon · Naruto · Saint Seiya'
+  },
+  seasia: {
+    name: 'Southeast Asia', flag: '🌏', subtitle: 'Fastest-Growing Emerging Market',
+    stats: [{ val:'150M+', lbl:'Combined regional viewers' },{ val:'30M+', lbl:'Viewers in Indonesia alone' },{ val:'Top 3', lbl:'Crunchyroll growth region' }],
+    timeline: [
+      { year:'1969', event:'Astro Boy first airs in the Philippines' },
+      { year:'1977', event:'Voltes V & Mazinger Z — Philippine cultural touchstones' },
+      { year:'1999', event:'Pokémon sweeps Southeast Asia' },
+      { year:'2010s', event:'Digital streaming enables mass adoption across SEA' },
+      { year:'2022', event:'Indonesia emerges as one of world\'s fastest-growing markets' }
+    ],
+    titles: 'Voltes V · Dragon Ball · Naruto · One Piece'
+  },
+  korea: {
+    name: 'South Korea', flag: '🇰🇷', subtitle: 'From Cultural Ban to Major Market',
+    stats: [{ val:'$200M+', lbl:'Annual market value (2023)' },{ val:'1998', lbl:'Year cultural ban was lifted' },{ val:'3×', lbl:'Above-average streaming rate' }],
+    timeline: [
+      { year:'1945', event:'Japanese cultural content officially banned in Korea' },
+      { year:'1970s–90s', event:'Korean-dubbed anime aired as "Korean originals"' },
+      { year:'1998', event:'Kim Dae-jung lifts ban — legal anime broadcast begins' },
+      { year:'2000s', event:'Rapid fan adoption; Korea becomes co-production hub' },
+      { year:'2012', event:'Korea emerges as major anime production partner' },
+      { year:'2023', event:'Koreans stream anime at 3× the global average' }
+    ],
+    titles: 'Slam Dunk · Dragon Ball · Attack on Titan · Demon Slayer'
+  },
+  mena: {
+    name: 'Middle East & North Africa', flag: '🌍', subtitle: 'Fastest-Growing New Market',
+    stats: [{ val:'~$1B', lbl:'MENA market value (2023)' },{ val:'1M+', lbl:'Anime Village Riyadh attendance' },{ val:'#1', lbl:'Saudi Arabia in MENA' }],
+    timeline: [
+      { year:'1983', event:'Captain Majed (Tsubasa) in Arabic — inspires Zidane & Torres' },
+      { year:'1990s', event:'Dragon Ball Z on MBC3 & Jordan TV reaches millions' },
+      { year:'2017', event:'Saudi Arabia lifts cinema ban; anime screenings follow' },
+      { year:'2019', event:'Anime Village, Riyadh Season — 1M+ attendees' },
+      { year:'2022', event:'Saudi Aramco sponsors anime; regional boom begins' },
+      { year:'2023', event:'MENA valued at ~$1B; fastest-growing market globally' }
+    ],
+    titles: 'Captain Tsubasa · Dragon Ball Z · Naruto · Demon Slayer'
+  }
+};
+
+function initMapPopup() {
+  const popup  = document.getElementById('map-popup');
+  const mapCon = document.getElementById('map-container');
+  if (!popup || !mapCon) return;
+
+  let hideTimer = null;
+
+  document.querySelectorAll('.map-pin').forEach(pin => {
+    pin.addEventListener('mouseenter', e => {
+      clearTimeout(hideTimer);
+      const region = pin.dataset.region;
+      const data   = REGION_DATA[region];
+      if (!data) return;
+
+      document.getElementById('pp-flag').textContent  = data.flag;
+      document.getElementById('pp-name').textContent  = data.name;
+      document.getElementById('pp-sub').textContent   = data.subtitle;
+      document.getElementById('pp-stats').innerHTML   = data.stats.map(s =>
+        `<div class="pp-stat"><span class="pp-stat-val">${s.val}</span><span class="pp-stat-lbl">${s.lbl}</span></div>`
+      ).join('');
+      document.getElementById('pp-timeline').innerHTML = data.timeline.map(t =>
+        `<div class="pp-tl-item"><span class="pp-tl-year">${t.year}</span><span class="pp-tl-event">${t.event}</span></div>`
+      ).join('');
+      document.getElementById('pp-titles').textContent = data.titles;
+
+      // Position popup near pin
+      const svgEl  = document.getElementById('world-svg');
+      const svgRect = svgEl.getBoundingClientRect();
+      const conRect = mapCon.getBoundingClientRect();
+      const pinRect = pin.getBoundingClientRect();
+      const pinCx   = pinRect.left + pinRect.width  / 2 - conRect.left;
+      const pinCy   = pinRect.top  + pinRect.height / 2 - conRect.top;
+      const popW = 295, popH = 360;
+      let left = pinCx + 16;
+      let top  = pinCy - 20;
+      if (left + popW > conRect.width  - 8) left = pinCx - popW - 16;
+      if (top  + popH > conRect.height - 8) top  = conRect.height - popH - 8;
+      if (top < 0) top = 8;
+      popup.style.left = left + 'px';
+      popup.style.top  = top  + 'px';
+      popup.classList.add('vis');
+    });
+
+    pin.addEventListener('mouseleave', () => {
+      hideTimer = setTimeout(() => popup.classList.remove('vis'), 180);
+    });
+  });
+
+  popup.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  popup.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => popup.classList.remove('vis'), 180); });
+}
+
 /* ── Init after video ── */
 function initPage() {
   updateSlides();
+  initMapPopup();
 }
 
 // Expose for external control (testing, accessibility)
