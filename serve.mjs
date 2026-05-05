@@ -16,12 +16,14 @@ const mime = {
   '.jpeg': 'image/jpeg',
   '.svg':  'image/svg+xml',
   '.ico':  'image/x-icon',
+  '.mp4':  'video/mp4',
+  '.webm': 'video/webm',
   '.woff2':'font/woff2',
 };
 
 createServer(async (req, res) => {
   const url = req.url === '/' ? '/index.html' : req.url;
-  const filePath = join(__dirname, url.split('?')[0]);
+  const filePath = join(__dirname, decodeURIComponent(url.split('?')[0]));
   try {
     const data = await readFile(filePath);
     const ext = extname(filePath).toLowerCase();

@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "puppeteer": "^24.42.0"
+  },
+  "devDependencies": {
+    "pdf-parse": "^2.4.5"
   }
 }
